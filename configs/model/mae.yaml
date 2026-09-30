@@ -1,0 +1,30 @@
+_recursive_: false
+
+defaults:
+  - /backbone@backbone_config: spec_vit_b # Default to vit_b, assumes configs/backbone/vit_b.yaml is set up
+  - /sensor@sensor_config: enmap
+  - _self_
+
+_target_: src.models.mae_module.MAEModule
+
+
+image_size: 128 # Input image size for RandomResizedCrop and MAE processing
+
+# MAE specific parameters
+decoder_dim: 512
+mask_ratio: 0.9
+
+# MAE Decoder parameters (names updated to match module __init__)
+decoder_depth: 1 
+decoder_num_heads: 16
+decoder_mlp_ratio: 4
+decoder_dropout: 0.0
+decoder_attention_dropout: 0.0
+
+# Optimizer and scheduler
+lr: 0.00001 # Corresponds to 1e-4
+T_max: ${trainer.max_epochs} # Total training epochs
+eta_min: 0.0 # Corresponds to 0
+
+# Other params
+norm_pix: True # Whether to normalize pixel values of target patches

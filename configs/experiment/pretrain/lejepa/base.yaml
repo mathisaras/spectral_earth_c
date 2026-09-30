@@ -1,0 +1,56 @@
+# @package _global_
+# LeJEPA pretrain with Spectral Earth MM Zarr (single sensor).
+# DataModule returns raw data; LeJEPA applies its own normalization + augmentations.
+
+defaults:
+  - override /data: spectral_earth_mm_zarr.yaml
+  - override /model: lejepa.yaml
+  - override /backbone@model.backbone_config: spec_vit_b
+  - override /sensor@model.sensor_config: enmap
+  - override /callbacks: self_supervised.yaml
+  - override /trainer: ddp_ssl.yaml
+  - override /logger: wandb.yaml
+
+tags: [ "pretrain", "lejepa", "enmap", "zarr_mm" ]
+
+seed: 12345
+
+data:
+  batch_size: 32
+  sensors: [ "ENMAP" ]
+  groups: null
+  num_temporal_views: 2  # enables image1/image2 mode
+  normalize: false
+  spatial_aug_p: 0
+  radiometric_aug_p: 0
+  sensor_drop_prob: 0
+  sampling_weights: null
+  num_workers: 5
+
+model:
+  lr: 0.0001
+  warmup_epochs: 20
+  max_epochs: 200
+  weight_decay: 0.00001
+  lamb: 0.5
+  multicrop: true
+  n_views: 6
+  sigreg_num_vectors: 256
+
+trainer:
+  max_epochs: ${model.max_epochs}
+  precision: 16-mixed
+  strategy: ddp_find_unused_parameters_true
+
+backbone_name: spec_vit_b
+
+task_name: ssl_pretrain/spectral_earth_mm/${sensor.name}/lejepa/${backbone_name}
+
+logger:
+  wandb:
+    tags: ${tags}
+    group: ${task_name}
+    project: ssl_pretrain_spectral_earth_mm
+    offline: False
+  aim:
+    experiment: ${task_name}

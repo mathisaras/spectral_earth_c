@@ -1,0 +1,4 @@
+split,source_count,filtered_source_count,subset_count,fraction_requested,fraction_actual,source_positive_patches,filtered_source_positive_patches,subset_positive_patches,source_positive_fraction,filtered_source_positive_fraction,subset_positive_fraction,require_positive_train
+train,48792,48792,4879,0.1,0.0999959009673717,45872,45872,4587,0.940154123626824,0.940154123626824,0.9401516704242673,False
+val,12094,12094,1209,0.1,0.09996692574830494,11170,11170,1117,0.923598478584422,0.923598478584422,0.923904052936311,False
+test,12373,12373,1237,0.1,0.09997575365715672,11834,11834,1183,0.9564374040248929,0.9564374040248929,0.9563459983831851,False

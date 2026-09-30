@@ -1,0 +1,19 @@
+groups:
+- [0]
+- [1]
+- [2]
+- [3]
+- [4]
+- [5]
+- [6]
+meta:
+  sensor: LO
+  group_names:
+  - Coastal/Aerosol
+  - Blue
+  - Green
+  - Red
+  - NIR
+  - SWIR1
+  - SWIR2
+  n_groups: 7

@@ -1,0 +1,12 @@
+defaults: 
+  - submitit_slurm
+  
+submitit_folder: ${hydra.sweep.dir}/.submitit/%j
+timeout_min: 1000
+partition: hpda2_compute_gpu
+nodes: 1
+tasks_per_node: 2
+cpus_per_task: 16
+gres: gpu:2
+account: pn52pi-c
+exclude: hpdar04c01s05,hpdar04c01s01

@@ -1,0 +1,4 @@
+_target_: src.datamodules.hyspecnet11k.HySpecNet11kDataModule
+root_dir: /dss/dsstbyfs02/pn49cu/pn49cu-dss-0001/enmap_data_final/HySpecNet-11k/hyspecnet-11k
+batch_size: 64
+num_workers: 12

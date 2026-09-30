@@ -1,0 +1,22 @@
+# EMIT (Earth Surface Mineral Dust Source Investigation) Sensor Configuration
+name: emit
+# `num_bands` corresponds to the processed good-wavelength view stored on disk.
+num_bands: 244
+num_bands_raw: 285
+rgb_indices: [45, 30, 15]  # Processed-band indices for approximate R/G/B
+
+# Normalization parameters
+normalization:
+  type: scale  # scale | harmonize | thermal | sar
+  scale: 35000.0  # matches emit_combined_statistics computation
+
+spectral:
+  domain: optical_hyperspectral
+  channel_view: stored_prefiltered
+  wavelength_unit: nm
+  raw_band_metadata_path: configs/sensor/metadata/emit_raw.csv
+  processed_band_metadata_path: configs/sensor/metadata/emit_processed.csv
+
+# Optional metadata
+resolution: 60  # meters
+img_size: 64

@@ -1,0 +1,8 @@
+# @package _global_
+
+defaults:
+  - /experiment/downstream/oxhyperminerals_emit_l2a/base
+  - override /data: oxhyperminerals_emit_l2a_10pct_trainpos
+  - _self_
+
+protocol: author_stride64_valid99_random_patch_10pct_trainpos

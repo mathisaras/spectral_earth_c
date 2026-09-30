@@ -1,0 +1,14 @@
+_target_: src.backbones.specaware.SpecAwareBackbone
+sensor: ${data.sensor_config.name}
+sensor_config_name: ${data.sensor_config.name}
+img_size: 224
+patch_size: 8
+pretrained: null
+sensor_name: others
+data_level: L2
+embed_dim: 768
+depth: 12
+num_heads: 12
+mlp_ratio: 4.0
+cls_embed: true
+drop_path_rate: 0.0

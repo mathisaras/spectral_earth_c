@@ -1,0 +1,30 @@
+# AMMIS Sensor Configuration
+name: ammis
+num_bands: 249
+num_bands_raw: 249
+rgb_indices: [104, 66, 32]
+
+# Normalization parameters
+normalization:
+  type: scale
+  # H2SR AMMIS tiles are already stored approximately in reflectance-like [0, 1].
+  # Keeping scale=1.0 preserves the current downstream behavior.
+  scale: 1.0
+
+# Approximate wavelength metadata used for cross-sensor spectral remapping.
+# The H2SR paper reports:
+#   "249 spectral bands with the spectral range between 391 and 984 nm"
+# We currently do not have per-band calibration metadata, so we approximate the
+# processed band centers as evenly spaced across that range. Because the stored
+# AMMIS view already matches the model input channels, raw and processed
+# metadata are identical for now.
+spectral:
+  domain: optical_hyperspectral
+  channel_view: stored_prefiltered
+  wavelength_unit: nm
+  raw_band_metadata_path: configs/sensor/metadata/ammis_raw.csv
+  processed_band_metadata_path: configs/sensor/metadata/ammis_processed.csv
+
+# Optional metadata
+resolution: 1  # meters
+img_size: 128

@@ -1,0 +1,7 @@
+_target_: src.datamodules.spectral_earth.SpectralEarthDataModule
+defaults:
+  - /sensor@sensor_config: enmap 
+root: /p/project/hai_ssr_msi/spectral_earth_mini
+batch_size: 32
+img_size: ${data.sensor_config.img_size}
+num_workers: 12

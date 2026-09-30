@@ -1,0 +1,18 @@
+# Detachable checkpoint registry for comparison models.
+# Stage these files locally under pretrained_models/comparison/ before running comparison sweeps.
+
+dofa_b: pretrained_models/comparison/dofa_b/DOFA_ViT_base_e100.pth
+dofa_l: pretrained_models/comparison/dofa_l/DOFA_ViT_large_e100.pth
+
+hypersigma_b: pretrained_models/comparison/hypersigma_b/spat-vit-base-ultra-checkpoint-1599.pth
+hypersigma_l: pretrained_models/comparison/hypersigma_l/spat-vit-large-ultra-checkpoint-1599.pth
+
+spectralearth_old:
+  spec_vit_b_mae: pretrained_models/comparison/spectralearth_old/spec_vit_b/mae.pth
+  spec_vit_l_mae: pretrained_models/comparison/spectralearth_old/spec_vit_l/mae.pth
+
+carl: pretrained_models/comparison/carl/carl_ssl_checkpoint.ckpt
+
+panopticon: pretrained_models/comparison/panopticon/panopticon_vitb14_teacher.pth
+
+specaware: pretrained_models/comparison/specaware/SpecAware_Base.pth

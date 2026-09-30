@@ -1,0 +1,4 @@
+_target_: src.backbones.spec_vit.SpecViTBase
+num_classes: 0
+patch_size: 4
+img_size: ${sensor.img_size}

@@ -1,0 +1,7 @@
+{
+  "task": "gaofen5_wuhan",
+  "sensor": "gaofen5",
+  "mode": "constant_scale",
+  "scale": 1.0,
+  "output_dir": "data/stats/comparison/hypersigma_scale/gaofen5"
+}

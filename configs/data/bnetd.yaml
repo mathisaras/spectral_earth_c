@@ -1,0 +1,28 @@
+# configs/data/bnetd.yaml
+_target_: src.datamodules.bnetd_datamodule.BNETDDataModule
+
+defaults:
+  - /sensor@sensor_config: enmap
+
+product: "bnetd" 
+
+classes: [0, 1, 2, 3, 6, 9, 10, 13, 15, 16, 21]
+
+
+# General parameters
+root: ${paths.data_dir}
+split_root: data/splits
+apply_input_normalization: true
+standardize: false
+standardization_mode: bandwise
+standardization_stats_path: null
+standardization_eps: 1.0e-6
+target_sensor_config: null
+batch_size: 32
+
+# Patch size (output image size from dataloader)
+img_size: ${data.sensor_config.img_size}
+
+num_workers: 8
+
+raw_mask: false

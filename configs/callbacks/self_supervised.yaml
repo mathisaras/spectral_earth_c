@@ -1,0 +1,26 @@
+defaults:
+  - model_checkpoint.yaml
+  - periodic_model_checkpoint.yaml
+  - model_summary.yaml
+  - rich_progress_bar.yaml
+  - _self_
+
+model_checkpoint:
+  dirpath: ${paths.output_dir}/checkpoints
+  filename: "epoch_{epoch:03d}"
+  save_last: True
+  auto_insert_metric_name: False
+  save_on_train_epoch_end: True
+
+# Keep a sparse history for long pretraining runs without changing the
+# existing last-checkpoint behavior.
+periodic_model_checkpoint:
+  dirpath: ${paths.output_dir}/checkpoints/every10
+  filename: "epoch_{epoch:03d}"
+  auto_insert_metric_name: False
+  every_n_epochs: 10
+  save_on_train_epoch_end: True
+
+
+model_summary:
+  max_depth: -1

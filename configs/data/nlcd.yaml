@@ -1,0 +1,24 @@
+# configs/data/nlcd.yaml
+_target_: src.datamodules.nlcd_datamodule.NLCDDataModule
+
+defaults:
+  - /sensor@sensor_config: enmap
+
+product: "nlcd"  # NLCD product year
+classes: [0, 11, 21, 22, 23, 24, 31, 41, 42, 43, 52, 71, 81, 82, 90, 95]  # If null, uses all NLCD classes by default
+
+# General parameters
+root: ${paths.data_dir}
+split_root: data/splits
+apply_input_normalization: true
+standardize: false
+standardization_mode: bandwise
+standardization_stats_path: null
+standardization_eps: 1.0e-6
+target_sensor_config: null
+batch_size: 64
+img_size: ${data.sensor_config.img_size}
+num_workers: 8
+subset_percent: 1.0  # Use all samples by default
+
+raw_mask: false 

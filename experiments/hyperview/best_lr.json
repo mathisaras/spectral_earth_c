@@ -1,0 +1,149 @@
+{
+  "downstream/hyperview_lr/spec_resnet50/finetune/dino": {
+    "learning_rate": 0.001,
+    "weight_decay": 0.001,
+    "freeze_backbone": false,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/spec_rn50/dino.pth"
+  },
+  "downstream/hyperview_lr/spec_resnet50/finetune/moco": {
+    "learning_rate": 1e-05,
+    "weight_decay": 0.001,
+    "freeze_backbone": false,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/spec_rn50/moco.pth"
+  },
+  "downstream/hyperview_lr/spec_resnet50/finetune/random": {
+    "learning_rate": 0.0001,
+    "weight_decay": 0.001,
+    "freeze_backbone": false,
+    "finetune_adapter": false,
+    "pretrained_weights": null
+  },
+  "downstream/hyperview_lr/spec_resnet50/finetune_adapter/dino": {
+    "learning_rate": 0.0001,
+    "weight_decay": 0.001,
+    "freeze_backbone": true,
+    "finetune_adapter": true,
+    "pretrained_weights": "./pretrained_models/spec_rn50/dino.pth"
+  },
+  "downstream/hyperview_lr/spec_resnet50/finetune_adapter/moco": {
+    "learning_rate": 0.003,
+    "weight_decay": 0.001,
+    "freeze_backbone": true,
+    "finetune_adapter": true,
+    "pretrained_weights": "./pretrained_models/spec_rn50/moco.pth"
+  },
+  "downstream/hyperview_lr/spec_resnet50/linear/dino": {
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "freeze_backbone": true,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/spec_rn50/dino.pth"
+  },
+  "downstream/hyperview_lr/spec_resnet50/linear/moco": {
+    "learning_rate": 0.003,
+    "weight_decay": 0.0001,
+    "freeze_backbone": true,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/spec_rn50/moco.pth"
+  },
+  "downstream/hyperview_lr/spec_resnet50/linear/random": {
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "freeze_backbone": true,
+    "finetune_adapter": false,
+    "pretrained_weights": null
+  },
+  "downstream/hyperview_lr/spec_vit_base/finetune/dino": {
+    "learning_rate": 1e-05,
+    "weight_decay": 0.001,
+    "freeze_backbone": false,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/spec_vit_b/dino.pth"
+  },
+  "downstream/hyperview_lr/spec_vit_base/finetune/moco": {
+    "learning_rate": 1e-05,
+    "weight_decay": 0.001,
+    "freeze_backbone": false,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/spec_vit_b/moco.pth"
+  },
+  "downstream/hyperview_lr/spec_vit_base/finetune/random": {
+    "learning_rate": 1e-05,
+    "weight_decay": 0.001,
+    "freeze_backbone": false,
+    "finetune_adapter": false,
+    "pretrained_weights": null
+  },
+  "downstream/hyperview_lr/spec_vit_base/finetune_adapter/dino": {
+    "learning_rate": 1e-05,
+    "weight_decay": 0.001,
+    "freeze_backbone": true,
+    "finetune_adapter": true,
+    "pretrained_weights": "./pretrained_models/spec_vit_b/dino.pth"
+  },
+  "downstream/hyperview_lr/spec_vit_base/finetune_adapter/moco": {
+    "learning_rate": 0.0001,
+    "weight_decay": 0.001,
+    "freeze_backbone": true,
+    "finetune_adapter": true,
+    "pretrained_weights": "./pretrained_models/spec_vit_b/moco.pth"
+  },
+  "downstream/hyperview_lr/spec_vit_base/linear/dino": {
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "freeze_backbone": true,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/spec_vit_b/dino.pth"
+  },
+  "downstream/hyperview_lr/spec_vit_base/linear/moco": {
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "freeze_backbone": true,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/spec_vit_b/moco.pth"
+  },
+  "downstream/hyperview_lr/spec_vit_base/linear/random": {
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "freeze_backbone": true,
+    "finetune_adapter": false,
+    "pretrained_weights": null
+  },
+  "downstream/hyperview_lr/spec_vit_large/finetune/mae": {
+    "learning_rate": 1e-05,
+    "weight_decay": 0.001,
+    "freeze_backbone": false,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/spec_vit_l/mae.pth"
+  },
+  "downstream/hyperview_lr/spec_vit_large/finetune/random": {
+    "learning_rate": 3e-05,
+    "weight_decay": 0.001,
+    "freeze_backbone": false,
+    "finetune_adapter": false,
+    "pretrained_weights": null
+  },
+  "downstream/hyperview_lr/spec_vit_large/finetune_adapter/mae": {
+    "learning_rate": 0.0001,
+    "weight_decay": 0.001,
+    "freeze_backbone": true,
+    "finetune_adapter": true,
+    "pretrained_weights": "./pretrained_models/spec_vit_l/mae.pth"
+  },
+  "downstream/hyperview_lr/spec_vit_large/linear/mae": {
+    "learning_rate": 0.003,
+    "weight_decay": 0.0001,
+    "freeze_backbone": true,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/spec_vit_l/mae.pth"
+  },
+  "downstream/hyperview_lr/spec_vit_large/linear/random": {
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "freeze_backbone": true,
+    "finetune_adapter": false,
+    "pretrained_weights": null
+  }
+}

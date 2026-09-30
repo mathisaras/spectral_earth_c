@@ -1,0 +1,16 @@
+{
+  "downstream/eo1_cdl_lr/dofa_b/linear/DOFA_ViT_base_e100": {
+    "learning_rate": 0.0003,
+    "weight_decay": 1e-05,
+    "freeze_backbone": true,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/dofa_b/DOFA_ViT_base_e100.pth"
+  },
+  "downstream/eo1_cdl_lr/dofa_l/linear/DOFA_ViT_large_e100": {
+    "learning_rate": 0.0003,
+    "weight_decay": 1e-05,
+    "freeze_backbone": true,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/dofa_l/DOFA_ViT_large_e100.pth"
+  }
+}

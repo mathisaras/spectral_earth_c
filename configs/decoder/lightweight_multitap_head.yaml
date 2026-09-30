@@ -1,0 +1,10 @@
+_target_: src.decoders.lightweight_multitap_seg_head.LightweightMultiTapSegHead
+
+# Shared lightweight multi-tap decoder for architecture-aware fair comparison.
+# Hiera uses native stage outputs; vanilla ViTs use intermediate transformer taps.
+in_channels_list: null  # inferred eagerly from the selected backbone taps
+decoder_dim: 128
+num_classes: null
+fuse: concat
+num_fusion_convs: 1
+norm_groups: 8

@@ -1,0 +1,14 @@
+defaults: 
+  - submitit_slurm
+  
+submitit_folder: ${hydra.sweep.dir}/.submitit/%j
+timeout_min: 7000
+partition: hpda2_compute_gpu
+# Override from command line: hydra.launcher.nodes=2 (or 4, etc.) for multi-node
+nodes: 1
+tasks_per_node: 4
+gpus_per_node: 4
+cpus_per_task: 16
+account: pn52pi-c
+
+exclude: hpdar04c04s02

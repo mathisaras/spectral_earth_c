@@ -1,0 +1,46 @@
+_recursive_: false
+
+defaults:
+  - /backbone@backbone_config: spec_vit_b # Default to vit_b, assumes configs/backbone/vit_b.yaml is set up
+  - /sensor@sensor_config: enmap
+  - _self_
+
+_target_: src.models.ijepa_module_timm.IJEPAModuleTIMM
+
+# Override the backbone global_pool to "" to keep spatial tokens
+backbone_config:
+  global_pool: ""
+
+# I-JEPA Predictor parameters
+predictor_embed_dim: 384
+predictor_depth: 6
+predictor_num_heads: 12
+
+# Optional VICReg anti-collapse regularization on student predictions.
+# Keep disabled by default; enable from launch script when needed.
+vicreg_enabled: false
+vicreg_weight: 0.0
+# Set lambda=0 to avoid adding an extra student-teacher matching term.
+vicreg_lambda_param: 0.0
+vicreg_mu_param: 25.0
+# Using z vs z doubles covariance contribution inside VICRegLoss, so 0.5 keeps scale balanced.
+vicreg_nu_param: 0.5
+vicreg_gather_distributed: false
+vicreg_eps: 0.0001
+# Number of token embeddings used for VICReg each step; -1 disables subsampling.
+vicreg_max_samples: 8192
+# Where to apply VICReg: directly on z_pred or via an extra projector head.
+vicreg_apply_on: projector  # z_pred | projector
+vicreg_projector_hidden_dim: 2048
+vicreg_projector_output_dim: 2048
+vicreg_projector_num_layers: 2
+
+# Optimizer and scheduler
+lr: 0.00001 # Corresponds to 1e-4
+weight_decay: 0.0001
+warmup_epochs: 20
+max_epochs: 200
+
+# EMA (Exponential Moving Average) for Teacher network
+ema_momentum_start: 0.996
+ema_momentum_end: 1.0

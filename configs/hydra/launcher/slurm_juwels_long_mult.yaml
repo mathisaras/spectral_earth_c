@@ -1,0 +1,13 @@
+# Legacy 2-node launcher. Prefer slurm_juwels_long + hydra.launcher.nodes=N override.
+defaults: 
+  - submitit_slurm
+  
+submitit_folder: ${hydra.sweep.dir}/.submitit/%j
+timeout_min: 1300
+partition: booster
+account: geofm4eo
+nodes: 2
+tasks_per_node: 4
+cpus_per_task: 12
+gpus_per_task: 1
+gres: gpu:4

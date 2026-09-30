@@ -1,0 +1,16 @@
+# Sentinel-1 (S1) SAR Sensor Configuration
+name: s1
+num_bands: 2  # VV and VH polarizations
+
+rgb_indices: [0, 1, 0]  # VV, VH, VV for pseudo-RGB visualization
+
+# Normalization parameters - dB scale to 0-1
+normalization:
+  type: sar  # scale | harmonize | thermal | sar
+  min: -50.0  # Typical min dB value
+  max: 0.0    # Typical max dB value
+
+# Optional metadata
+resolution: 10  # meters
+img_size: 128
+band_names: ["VV", "VH"]

@@ -1,0 +1,9 @@
+{
+  "task": "h2sr",
+  "sensor": "ammis",
+  "mode": "meanstd",
+  "batches": 380,
+  "pixels_per_band": 136620000,
+  "resize": false,
+  "output_dir": "data/stats/comparison/raw_meanstd/ammis"
+}

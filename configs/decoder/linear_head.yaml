@@ -1,0 +1,4 @@
+_target_: src.decoders.linear_head.LinearHead
+input_dim: null  # Will be set dynamically from backbone
+output_dim: null  # Will be set by model config
+dropout: 0.0 

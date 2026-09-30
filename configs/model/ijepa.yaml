@@ -1,0 +1,26 @@
+_recursive_: false
+
+defaults:
+  - /backbone@backbone_config: vit_b_torchvision # Default to vit_b, assumes configs/backbone/vit_b.yaml is set up
+  - /sensor@sensor_config: enmap
+  - _self_
+
+_target_: src.models.ijepa_module.IJEPAModule
+
+
+
+# I-JEPA Predictor parameters
+predictor_embed_dim: 384
+predictor_depth: 6
+predictor_num_heads: 12
+
+# Optimizer and scheduler
+lr: 0.00001 # Corresponds to 1e-4
+weight_decay: 0.0001
+warmup_epochs: 20
+max_epochs: 200
+
+# EMA (Exponential Moving Average) for Teacher network
+ema_momentum_start: 0.996
+ema_momentum_end: 1.0
+

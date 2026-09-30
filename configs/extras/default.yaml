@@ -1,0 +1,15 @@
+# disable python warnings if they annoy you
+ignore_warnings: False
+
+# ask user for tags if none are provided in the config
+enforce_tags: True
+
+# pretty print config tree at the start of the run using Rich library
+print_config: True
+
+# wandb-osh: when using wandb offline (compute nodes without internet), add TriggerWandbSyncLightningCallback
+# so a watcher on the login node can sync logs. Set false to disable (e.g. if you use manual wandb sync).
+use_wandb_osh: True
+# Directory for wandb-osh trigger files (shared FS). watcher: wandb-osh --command-dir <this_path>
+# Keep this in a subdirectory so it doesn't clutter the top-level logs/ folder.
+wandb_osh_communication_dir: ${paths.log_dir}/wandb_osh

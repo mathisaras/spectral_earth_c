@@ -1,0 +1,51 @@
+# @package _global_
+
+defaults:
+  - override /data: eo1_cdl
+  - override /sensor: eo1
+  - override /sensor@data.sensor_config: eo1
+  - override /model: segmentation
+  - override /trainer: ddp
+  - override /paths: default
+  - override /logger: wandb
+  - override /backbone@model.backbone_config: spec_vit_s
+  - override /decoder@model.decoder_config: conv_head 
+
+
+tags: [ "downstream", "eo1", "cdl", "segmentation"]
+
+# SemanticSegmentationModule parameter overrides
+model:  
+  num_classes: 14
+  ignore_index: ${model.num_classes}
+  model_type: "vit_seg"
+  learning_rate: 1e-3
+  weight_decay: 1e-4
+  t_max: ${trainer.max_epochs}
+  eta_min: 1e-6
+
+# Set the decoder num_classes to the model num_classes
+decoder:
+  num_classes: ${model.num_classes}
+
+# DataModule parameter overrides
+data:
+  batch_size: 8
+  num_workers: 4
+  root: ${paths.data_dir}/eo1_cdl
+
+trainer:
+  max_epochs: 100
+
+experiment_setup: "eo1_cdl"
+protocol: null
+weight_init: random
+backbone_name: null
+decoder_name: null
+
+task_name: downstream/${experiment_setup}/${sensor.name}/${decoder_name}/${backbone_name}/${protocol}/${weight_init}
+
+logger:
+  wandb:
+    group: ${task_name}
+    project: "${experiment_setup}"

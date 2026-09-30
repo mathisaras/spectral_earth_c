@@ -1,0 +1,7 @@
+{
+  "task": "h2sr",
+  "sensor": "ammis",
+  "mode": "constant_scale",
+  "scale": 1.0,
+  "output_dir": "data/stats/comparison/hypersigma_scale/ammis"
+}

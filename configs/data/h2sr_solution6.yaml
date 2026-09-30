@@ -1,0 +1,34 @@
+# configs/data/h2sr_solution6.yaml
+#
+# Opt-in AMMIS/H2SR variant for testing the visible blue-green correction from
+# the H2SR inspection notebook. The default h2sr.yaml loader is unchanged.
+
+defaults:
+  - h2sr
+  - _self_
+
+# AMMIS is normalized to reflectance-like space, then spectrally remapped to
+# DESIS by BaseSegmentationDataModule. Use this with
+# `+sensor@data.target_sensor_config=desis` or the remap benchmark script's
+# `ENABLE_SENSOR_REMAP=true SENSOR=desis`. This correction runs after that remap
+# and before optional DESIS standardization.
+post_projection_correction:
+  _target_: src.transforms.h2sr_visible_correction.H2SRAmmisToDesisVisibleCorrection
+  target_sensor_config: ${data.target_sensor_config}
+  sensor_name: DESIS
+  stats_path: data/stats/mm_full_flat_normalized_random_single
+  stats_mode: bandwise
+  stats_eps: ${data.standardization_eps}
+  reference_npz_path: tmp/h2sr_diagnostics_64/sampled_curves.npz
+  mode: aggregate_mean_visible_smooth_alpha_1
+  alpha: 1.0
+  smooth_window: 11
+  visible_max_nm: 650.0
+  clip_max_z: 1.35
+  positive_only: true
+  neutralize_edges: true
+  neutralize_min_nm: 430.0
+  neutralize_max_nm: 950.0
+  clip_output: true
+  output_min: 0.0
+  output_max: 1.0

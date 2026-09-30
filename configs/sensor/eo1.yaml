@@ -1,0 +1,32 @@
+# EO-1 Hyperion Sensor Configuration
+name: eo1
+# `num_bands` is the processed post-trim view seen by the model.
+num_bands: 163  # After default on-the-fly trimming of low-signal bands from the 198-band stack.
+num_bands_raw: 198
+rgb_indices: [43, 28, 10]  # Processed-band indices for approximate R/G/B
+
+# Normalization parameters
+normalization:
+  type: scale  # scale | harmonize | thermal | sar
+  scale: 10000.0  # 0-10000 -> 0-1
+
+# Band trimming - removes low-signal / absorption-window bands
+band_trim:
+  drop_ranges_1based:
+    - [94, 106]
+    - [139, 156]
+    - [195, 198]
+  optional_drop_ranges_1based:
+    - [159, 161]
+  include_optional: false
+
+spectral:
+  domain: optical_hyperspectral
+  channel_view: processed_after_band_trim
+  wavelength_unit: nm
+  raw_band_metadata_path: configs/sensor/metadata/eo1_raw.csv
+  processed_band_metadata_path: configs/sensor/metadata/eo1_processed.csv
+
+# Optional metadata
+resolution: 30  # meters
+img_size: 128

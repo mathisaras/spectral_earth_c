@@ -1,0 +1,122 @@
+generated_at_utc: '2026-02-21T11:10:01+00:00'
+sensor: S2
+zarr_path: /dss/dsstbyfs02/pn49cu/pn49cu-dss-0001/spectral_earth_mm.zarr
+timestamp_mode: random_single
+no_valid_policy: skip
+normalize: true
+pipeline:
+  desis_band_trim:
+    enabled: false
+  lt_nan_fix:
+    enabled: false
+  mm_normalize:
+    enabled: true
+stats:
+  num_bands: 12
+  pixel_count_per_band: 304046456832
+  pixel_count_total: 3648557481984
+  input_sample_count: 2061947
+  selected_view_count: 2061947
+  fallback_no_valid_count: 0
+  skipped_no_valid_count: 0
+  global:
+    mean: 0.20370391236132376
+    std: 0.14397907787724365
+    min: 0.0
+    max: 1.0
+  bandwise:
+    mean:
+    - 0.07485154329286525
+    - 0.091495364595807
+    - 0.12437775471504624
+    - 0.1541273974013138
+    - 0.18791203806841786
+    - 0.23574434017719187
+    - 0.2565983267455903
+    - 0.2653039406513407
+    - 0.2724777341290638
+    - 0.27419091590212513
+    - 0.2827766567207982
+    - 0.2245909359363481
+    std:
+    - 0.08532542676032369
+    - 0.0928271695974524
+    - 0.10278792816782333
+    - 0.13153536723773054
+    - 0.13078871271000364
+    - 0.12156690042595224
+    - 0.12497794433532652
+    - 0.12830450070616817
+    - 0.12557465789102626
+    - 0.1265303635862369
+    - 0.15527723433185509
+    - 0.15146042123501968
+    min:
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+    max:
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+    - 1.0
+  groups:
+    desis_only:
+      input_sample_count: 54111
+      selected_view_count: 54111
+      fallback_no_valid_count: 0
+      skipped_no_valid_count: 0
+      pixel_count_per_band: 7978991616
+    emit_only:
+      input_sample_count: 486388
+      selected_view_count: 486388
+      fallback_no_valid_count: 0
+      skipped_no_valid_count: 0
+      pixel_count_per_band: 71720828928
+    enmap_only:
+      input_sample_count: 580292
+      selected_view_count: 580292
+      fallback_no_valid_count: 0
+      skipped_no_valid_count: 0
+      pixel_count_per_band: 85567537152
+    pair_emit_desis:
+      input_sample_count: 102589
+      selected_view_count: 102589
+      fallback_no_valid_count: 0
+      skipped_no_valid_count: 0
+      pixel_count_per_band: 15127363584
+    pair_emit_enmap:
+      input_sample_count: 732196
+      selected_view_count: 732196
+      fallback_no_valid_count: 0
+      skipped_no_valid_count: 0
+      pixel_count_per_band: 107966693376
+    pair_enmap_desis:
+      input_sample_count: 37129
+      selected_view_count: 37129
+      fallback_no_valid_count: 0
+      skipped_no_valid_count: 0
+      pixel_count_per_band: 5474893824
+    triplet:
+      input_sample_count: 69242
+      selected_view_count: 69242
+      fallback_no_valid_count: 0
+      skipped_no_valid_count: 0
+      pixel_count_per_band: 10210148352

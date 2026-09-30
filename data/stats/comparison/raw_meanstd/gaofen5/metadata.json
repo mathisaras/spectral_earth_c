@@ -1,0 +1,9 @@
+{
+  "task": "gaofen5_wuhan",
+  "sensor": "gaofen5",
+  "mode": "meanstd",
+  "batches": 500,
+  "pixels_per_band": 32751616,
+  "resize": false,
+  "output_dir": "data/stats/comparison/raw_meanstd/gaofen5"
+}

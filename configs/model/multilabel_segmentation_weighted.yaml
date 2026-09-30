@@ -1,0 +1,33 @@
+_target_: src.models.multilabel_segmentation_module_weighted.MultiLabelSegmentationModuleWeighted
+_recursive_: false
+
+defaults:
+  - /backbone@backbone_config: spec_vit_s
+  - /decoder@decoder_config: conv_head
+  - _self_
+
+num_classes: ${data.num_classes}
+class_names: ${data.class_names}
+model_type: "vit_seg"
+tap_indices: null
+multi_tap_is_vit: null
+probe_in_chans: ${data.sensor_config.num_bands}
+probe_img_size: ${data.img_size}
+log_per_class_metrics: true
+log_validation_images: false
+validation_image_log_interval: 20
+validation_image_max_samples: 4
+validation_image_batch_idx: 0
+validation_prediction_threshold: 0.5
+rgb_indices: ${data.sensor_config.rgb_indices}
+
+pretrained_weights: null
+freeze_backbone: false
+finetune_adapter: false
+finetune_first_n_layers: 0
+
+learning_rate: 1e-3
+weight_decay: 0.01
+t_max: 100
+eta_min: 1e-6
+pos_weight: null

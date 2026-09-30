@@ -1,0 +1,46 @@
+_recursive_: false
+
+defaults:
+  - /backbone@backbone_config: spec_vit_b # Populate backbone_config directly
+  - /sensor@sensor_config: enmap
+  - _self_
+
+_target_: src.models.dino_module.DINOModule
+
+# backbone_config is now populated by the defaults list above.
+# sensor_config is populated by /sensor@sensor_config (override in experiment if needed).
+
+hidden_dim: 2048
+bottleneck_dim: 256
+output_dim: 128
+lr: 0.06
+warmup_epochs: 20
+weight_decay: 1e-5
+momentum: 0.9
+multicrop: False
+n_views: 0
+global_crop_scale: [0.3, 1.0]
+local_crop_scale: [0.05, 0.3]
+# Optional mean/std standardization on top of sensor normalization (default off).
+standardize: false
+standardization_mode: bandwise   # bandwise | global
+standardization_stats_path: null # sensor yaml, index.yaml, or directory
+standardization_eps: 1.0e-6
+
+# Optional student-local-view spectral corruption.
+# Recommended split:
+# - HSI / TwoStagesHiera: use spectral mask token via student_local_spectral_mask_ratio
+# - PANGAEA-style missing bands for linear stems: use student_local_input_drop_ratio
+student_local_input_drop_ratio: 0.0
+student_local_input_drop_min_ratio: null
+student_local_input_drop_max_ratio: null
+student_local_input_drop_strategy: random      # random | contiguous
+student_local_input_drop_group_size: 1
+student_local_input_drop_fill_mode: transformed_zero  # transformed_zero | zero
+student_local_spectral_mask_ratio: 0.0
+student_local_spectral_mask_min_ratio: null
+student_local_spectral_mask_max_ratio: null
+student_local_spectral_mask_strategy: random   # random | contiguous
+
+# in_channels is removed, will be derived from sensor_config.num_bands
+# token_patch_size is removed, should be part of backbone_config if needed

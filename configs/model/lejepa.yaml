@@ -1,0 +1,89 @@
+_recursive_: false
+
+defaults:
+  - /backbone@backbone_config: spec_vit_b
+  - /sensor@sensor_config: enmap
+  - _self_
+
+_target_: src.models.lejepa_module.LeJEPAModule
+
+# Projector
+output_dim: 128
+projector_hidden_dim: 2048
+projector_num_layers: 3
+projector_use_bn: true
+
+# LeJEPA weighting
+# lejepa_loss = lamb * sigreg + (1 - lamb) * invariance
+lamb: 0.5
+# Invariance modes:
+# - coupled_center: current behavior, all views match a shared global center
+#   and local losses can still pull global representations through the center.
+# - detached_global_center: globals define a detached anchor; globals remain
+#   mutually aligned and locals match that anchor without pulling it.
+invariance_mode: coupled_center
+
+# Optimizer / scheduler
+lr: 0.0001
+warmup_epochs: 20
+max_epochs: 200
+weight_decay: 0.00001
+
+# Multi-view augmentations (DINO-like)
+multicrop: true
+n_views: 4  # local views
+# LeJEPA paper-style defaults:
+# - 2 global views with larger crops
+# - 6 local views at lower resolution (98/224 of global size)
+global_crop_scale: [0.3, 1.0]
+local_crop_scale: [0.05, 0.3]
+# Set true for fixed-grid backbones that cannot ingest smaller locals.
+local_resize_to_global: true
+# Optional absolute local view size override (sensor-specific), e.g. 56 or 168.
+local_view_size: null
+# Optional local/global ratio override. If null and local_view_size is null,
+# module falls back to LeJEPA-style 98/224 proportion.
+local_view_size_ratio: null
+# Blur config (sensor/resolution aware):
+# default ratio gives kernel ~7 at 128px and scales with resolution.
+blur_kernel_ratio: 0.0546875  # 7 / 128
+global_blur_kernel_size: null
+local_blur_kernel_size: null
+global_blur_p: 0.5
+local_blur_p: 0.5
+blur_sigma: [0.1, 2.0]
+
+# Radiometric augmentation
+radiometric_aug_p: 0.5
+radiometric_brightness_range: [0.8, 1.2]
+radiometric_bias_range: [-0.1, 0.1]
+
+# Feature extraction for sequence backbones
+sequence_pool: auto  # auto | mean | cls
+
+# Optional mean/std standardization on top of sensor normalization
+standardize: false
+standardization_mode: bandwise
+standardization_stats_path: null
+standardization_eps: 1.0e-6
+
+# Optional student-local-view spectral corruption.
+# Recommended split:
+# - HSI / TwoStagesHiera: use spectral mask token via student_local_spectral_mask_ratio
+# - PANGAEA-style missing bands for linear stems: use student_local_input_drop_ratio
+student_local_input_drop_ratio: 0.0
+student_local_input_drop_min_ratio: null
+student_local_input_drop_max_ratio: null
+student_local_input_drop_strategy: random      # random | contiguous
+student_local_input_drop_group_size: 1
+student_local_input_drop_fill_mode: transformed_zero  # transformed_zero | zero
+student_local_spectral_mask_ratio: 0.0
+student_local_spectral_mask_min_ratio: null
+student_local_spectral_mask_max_ratio: null
+student_local_spectral_mask_strategy: random   # random | contiguous
+
+# SIGReg
+sigreg_knots: 17
+sigreg_t_max: 3.0
+sigreg_num_vectors: 256
+sigreg_gather_distributed: false

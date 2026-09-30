@@ -1,0 +1,7 @@
+defaults:
+  - default.yaml
+
+data_dir: /p/project1/hai_1035/spectral_earth/downstream_tasks/
+se_dir: /p/project1/hai_ssr_msi/data/
+log_dir: logs
+zarr_path: /p/scratch/hai_1114/spectral_earth_200k_full_v2.zarr

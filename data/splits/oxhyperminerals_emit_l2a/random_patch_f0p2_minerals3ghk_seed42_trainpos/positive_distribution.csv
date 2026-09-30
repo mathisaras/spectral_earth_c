@@ -1,0 +1,6 @@
+split,has_positive,count,fraction
+train,True,9174,1.0
+val,False,185,0.07647788342290203
+val,True,2234,0.9235221165770979
+test,False,108,0.04363636363636364
+test,True,2367,0.9563636363636364

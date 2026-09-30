@@ -1,0 +1,16 @@
+_target_: src.decoders.multiscale_conv_head.MultiScaleConvHead
+
+# --- Parameters for the Simple Decoder Head ---
+
+# 1. Input Channels (The Contract with the Segmentor)
+# This MUST be linked to the 'fusion_channels' parameter defined in your
+# MultiScaleConvSegmentor config, as it is the channel dimension of the
+# fused, projected tensor that the segmentor will pass to the decoder.
+in_channels: 768
+
+# 2. Number of Output Classes
+num_classes: null
+
+# 3. Upsampling Factor (Total Stride)
+# This links the decoder's upsampling needs to the backbone's initial stride.
+patch_size: ${model.backbone_config.patch_size}

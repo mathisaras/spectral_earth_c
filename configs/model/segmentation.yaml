@@ -1,0 +1,40 @@
+_target_: src.models.semantic_segmentation_module.SemanticSegmentationModule
+_recursive_: false
+
+# --- Default Component Configurations ---
+# These specify the *default* backbone and decoder to be used if an experiment
+# doesn't explicitly override them.
+# It uses Hydra's group override mechanism to select from 'configs/backbone/*.yaml'
+# and 'configs/decoder/*.yaml'.
+defaults:
+  - /backbone@backbone_config: spec_vit_s # Default backbone choice
+  - /decoder@decoder_config: conv_head   # Default decoder choice
+  - _self_                                     # Allows structured config and interpolation
+
+# --- SemanticSegmentationModule __init__ arguments ---
+# These serve as defaults. Experiment files can override these.
+
+# Core parameters
+num_classes: null       # To be set by experiment (e.g., number of segmentation classes)
+ignore_index: null      # Optional: Index in the target to ignore during loss/metrics
+model_type: "vit_seg"   # Type of segmentation model (e.g., "fcn_seg", "vit_seg")
+tap_indices: null       # Optional taps for model_type=multi_tap_seg, e.g. [3, 7, 11] for 12-block ViTs
+multi_tap_is_vit: null  # Optional explicit architecture hint; null = infer from backbone
+probe_in_chans: ${data.sensor_config.num_bands}
+probe_img_size: ${data.img_size}
+log_validation_images: true
+validation_image_log_every_n_epochs: 20
+num_validation_images_to_log: 8
+
+# Pretrained weights for the backbone (loaded after backbone instantiation from config)
+pretrained_weights: null # Example: /path/to/your/backbone_weights.ckpt or null
+freeze_backbone: false
+finetune_adapter: false
+
+# Optimizer parameters
+learning_rate: 1e-3
+weight_decay: 0.01      # Adjusted from 0.0 as per common practice
+
+# Scheduler parameters
+t_max: 100       # For CosineAnnealingLR
+eta_min: 1e-6 # eta_min for CosineAnnealingLR

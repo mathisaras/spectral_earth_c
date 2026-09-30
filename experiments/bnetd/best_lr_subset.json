@@ -1,0 +1,9 @@
+{
+    "downstream/bnetd_lr/spec_resnet50/finetune/random": {
+    "learning_rate": 0.003,
+    "weight_decay": 0.0001,
+    "freeze_backbone": false,
+    "finetune_adapter": true,
+    "pretrained_weights": null
+    }
+}

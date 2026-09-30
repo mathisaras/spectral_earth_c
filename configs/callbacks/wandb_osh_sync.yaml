@@ -1,0 +1,7 @@
+# wandb-osh: triggers sync of wandb offline logs from compute nodes to wandb via login-node watcher.
+# Usually added automatically when logger.wandb.offline=True (see train.py).
+# Include this in callbacks defaults if you prefer config-driven setup instead.
+
+wandb_osh_sync:
+  _target_: wandb_osh.lightning_hooks.TriggerWandbSyncLightningCallback
+  communication_dir: ${paths.log_dir}/wandb_osh

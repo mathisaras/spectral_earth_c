@@ -1,0 +1,3 @@
+_target_: src.decoders.fcn_head.FCNHead
+num_input_features: null  # Will be set dynamically from backbone
+num_classes: null  # Will be set by model config 

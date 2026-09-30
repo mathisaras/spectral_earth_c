@@ -1,0 +1,44 @@
+{
+  "downstream/corine_lr/resnet50/finetune/dino": {
+    "learning_rate": 0.1,
+    "weight_decay": 0.0001,
+    "freeze_backbone": false,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/resnet50/dino.pth"
+  },
+  "downstream/corine_lr/resnet50/finetune/moco": {
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "freeze_backbone": false,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/resnet50/moco.pth"
+  },
+  "downstream/corine_lr/resnet50/finetune/random": {
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "freeze_backbone": false,
+    "finetune_adapter": false,
+    "pretrained_weights": null
+  },
+  "downstream/corine_lr/resnet50/linear/dino": {
+    "learning_rate": 0.3,
+    "weight_decay": 1e-05,
+    "freeze_backbone": true,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/resnet50/dino.pth"
+  },
+  "downstream/corine_lr/resnet50/linear/moco": {
+    "learning_rate": 0.01,
+    "weight_decay": 1e-05,
+    "freeze_backbone": true,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/resnet50/moco.pth"
+  },
+  "downstream/corine_lr/resnet50/linear/random": {
+    "learning_rate": 0.03,
+    "weight_decay": 1e-05,
+    "freeze_backbone": true,
+    "finetune_adapter": false,
+    "pretrained_weights": null
+  }
+}

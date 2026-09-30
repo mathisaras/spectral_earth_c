@@ -1,0 +1,57 @@
+{
+  "dataset_root": "/dss/dsstbyfs02/pn49cu/pn49cu-dss-0020/OxHyperMinerals/oxhyperminerals_emit_l2a_author64_valid99",
+  "source_split_dir": "/dss/dsstbyfs02/pn49cu/pn49cu-dss-0001/codes/spectral_earth_mm_dev/data/splits/oxhyperminerals_emit_l2a",
+  "output_dir": "/dss/dsstbyfs02/pn49cu/pn49cu-dss-0001/codes/spectral_earth_mm_dev/data/splits/oxhyperminerals_emit_l2a/random_patch_f0p1_minerals10_seed42",
+  "label_product": "minerals10",
+  "fraction": 0.1,
+  "seed": 42,
+  "stratify_positive": true,
+  "require_positive_train": false,
+  "splits": [
+    {
+      "split": "train",
+      "source_count": 48792,
+      "filtered_source_count": 48792,
+      "subset_count": 4879,
+      "fraction_requested": 0.1,
+      "fraction_actual": 0.0999959009673717,
+      "source_positive_patches": 47680,
+      "filtered_source_positive_patches": 47680,
+      "subset_positive_patches": 4768,
+      "source_positive_fraction": 0.9772093785866536,
+      "filtered_source_positive_fraction": 0.9772093785866536,
+      "subset_positive_fraction": 0.9772494363599098,
+      "require_positive_train": false
+    },
+    {
+      "split": "val",
+      "source_count": 12094,
+      "filtered_source_count": 12094,
+      "subset_count": 1209,
+      "fraction_requested": 0.1,
+      "fraction_actual": 0.09996692574830494,
+      "source_positive_patches": 11547,
+      "filtered_source_positive_patches": 11547,
+      "subset_positive_patches": 1154,
+      "source_positive_fraction": 0.9547709608070117,
+      "filtered_source_positive_fraction": 0.9547709608070117,
+      "subset_positive_fraction": 0.9545078577336642,
+      "require_positive_train": false
+    },
+    {
+      "split": "test",
+      "source_count": 12373,
+      "filtered_source_count": 12373,
+      "subset_count": 1237,
+      "fraction_requested": 0.1,
+      "fraction_actual": 0.09997575365715672,
+      "source_positive_patches": 12090,
+      "filtered_source_positive_patches": 12090,
+      "subset_positive_patches": 1209,
+      "source_positive_fraction": 0.9771276165844985,
+      "filtered_source_positive_fraction": 0.9771276165844985,
+      "subset_positive_fraction": 0.9773645917542442,
+      "require_positive_train": false
+    }
+  ]
+}

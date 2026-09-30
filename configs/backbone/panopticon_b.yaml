@@ -1,0 +1,13 @@
+_target_: src.backbones.panopticon.PanopticonBackbone
+sensor: ${data.sensor_config.name}
+sensor_config_name: ${data.sensor_config.name}
+hub_repo: Panopticon-FM/panopticon
+hub_model: panopticon_vitb14
+hub_arch_model: _panopticon_vitb14
+checkpoint_path: pretrained_models/comparison/panopticon/panopticon_vitb14_teacher.pth
+img_size: 224
+patch_size: 14
+num_features: 768
+output_layers: [3, 5, 7, 11]
+channel_id_mode: floor_nm
+trust_repo: true

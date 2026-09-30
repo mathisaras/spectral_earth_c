@@ -1,0 +1,16 @@
+generated_at_utc: '2026-02-21T11:10:01+00:00'
+zarr_path: /dss/dsstbyfs02/pn49cu/pn49cu-dss-0001/spectral_earth_mm.zarr
+timestamp_mode: random_single
+no_valid_policy: skip
+normalize: true
+sample_chunk: 32
+max_samples_per_group: null
+sensor_parallelism: 7
+sensors:
+  DESIS: /dss/dsstbyfs02/pn49cu/pn49cu-dss-0001/codes/spectral_earth_mm_dev/data/stats/mm_full_flat_normalized_random_single/desis.yaml
+  EMIT: /dss/dsstbyfs02/pn49cu/pn49cu-dss-0001/codes/spectral_earth_mm_dev/data/stats/mm_full_flat_normalized_random_single/emit.yaml
+  ENMAP: /dss/dsstbyfs02/pn49cu/pn49cu-dss-0001/codes/spectral_earth_mm_dev/data/stats/mm_full_flat_normalized_random_single/enmap.yaml
+  LO: /dss/dsstbyfs02/pn49cu/pn49cu-dss-0001/codes/spectral_earth_mm_dev/data/stats/mm_full_flat_normalized_random_single/lo.yaml
+  LT: /dss/dsstbyfs02/pn49cu/pn49cu-dss-0001/codes/spectral_earth_mm_dev/data/stats/mm_full_flat_normalized_random_single/lt.yaml
+  S1: /dss/dsstbyfs02/pn49cu/pn49cu-dss-0001/codes/spectral_earth_mm_dev/data/stats/mm_full_flat_normalized_random_single/s1.yaml
+  S2: /dss/dsstbyfs02/pn49cu/pn49cu-dss-0001/codes/spectral_earth_mm_dev/data/stats/mm_full_flat_normalized_random_single/s2.yaml

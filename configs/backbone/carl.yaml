@@ -1,0 +1,32 @@
+_target_: src.backbones.carl.CARLModel
+patch_size: 8
+img_size: 128
+ssl_ckpt_path: null
+sensor: ${data.sensor_config.name}
+sensor_config_name: ${data.sensor_config.name}
+wave_list: null
+
+spec_encoder_kwargs:
+  embed_dim: 384
+  depth: 8
+  num_heads: 6
+  layer_scale: 0.0001
+  pos_enc_sigma: 3
+  n_queries: 8
+  qkv_bias: true
+  ffn_bias: true
+  drop_path_rate: 0.0
+  proj_drop: 0.0
+  drop: 0.0
+  attn_drop: 0.0
+
+spat_encoder_kwargs:
+  model_name: timm/eva02_base_patch14_224.mim_in22k
+  depth: 8
+  model_kwargs:
+    drop_rate: 0.0
+    pos_drop_rate: 0.0
+    patch_drop_rate: 0.0
+    proj_drop_rate: 0.0
+    attn_drop_rate: 0.0
+    drop_path_rate: 0.0

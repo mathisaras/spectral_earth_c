@@ -1,0 +1,168 @@
+_target_: src.backbones.multi_sensor_two_stages_hiera.MultiSensorTwoStagesHiera
+
+# Sensors used by the multimodal backbone.
+sensors: [ENMAP, DESIS, EMIT, S2, LO, LT, S1]
+
+# Channel count per sensor.
+sensor_in_chans:
+  ENMAP: 202
+  DESIS: 215
+  EMIT: 244
+  S2: 12
+  LO: 7
+  LT: 1
+  S1: 2
+
+# Fixed native input size per sensor (no resizing in backbone).
+sensor_input_size:
+  ENMAP: [128, 128]
+  DESIS: [128, 128]
+  EMIT: [64, 64]
+  S2: [384, 384]
+  LO: [128, 128]
+  LT: [128, 128]
+  S1: [384, 384]
+
+# Spectral encoder type per sensor.
+# - linear: single lightweight patch projection
+# - spectral_transformer: grouped spectral transformer + pooling
+sensor_encoder_types:
+  ENMAP: spectral_transformer
+  DESIS: spectral_transformer
+  EMIT: spectral_transformer
+  S2: linear
+  LO: linear
+  LT: linear
+  S1: linear
+
+# Core Hiera configuration.
+embed_dim: 192
+num_heads: 2
+num_classes: 0
+stages: [2, 6, 10]
+q_pool: 2
+q_stride: [2, 2]
+mask_unit_size: [4, 4]
+mask_unit_attn: [true, true, false]
+dim_mul: 2.0
+head_mul: 2.0
+
+# Patch projection setup.
+patch_kernel: [5, 5]
+patch_stride: [2, 2]
+patch_padding: [2, 2]
+patch_size: 2
+
+norm_pix: true
+
+# Optional per-sensor Hiera overrides.
+per_sensor_patch_kernel:
+  ENMAP: [3, 3]
+  DESIS: [3, 3]
+  EMIT: [1, 1]
+  S2: [7, 7]
+  LO: [3, 3]
+  LT: [3, 3]
+  S1: [7, 7]
+per_sensor_patch_stride:
+  ENMAP: [2, 2]
+  DESIS: [2, 2]
+  EMIT: [1, 1]
+  S2: [6, 6]
+  LO: [2, 2]
+  LT: [2, 2]
+  S1: [6, 6]
+per_sensor_patch_padding:
+  ENMAP: [1, 1]
+  DESIS: [1, 1]
+  EMIT: [0, 0]
+  S2: [3, 3]
+  LO: [1, 1]
+  LT: [1, 1]
+  S1: [3, 3]
+per_sensor_stages:
+  ENMAP: [2, 6, 10]
+  DESIS: [2, 6, 10]
+  EMIT: [2, 6, 10]
+  S2: [2, 6, 10]
+  LO: [2, 6, 10]
+  LT: [2, 6, 10]
+  S1: [2, 6, 10]
+per_sensor_q_pool:
+  ENMAP: 2
+  DESIS: 2
+  EMIT: 2
+  S2: 2
+  LO: 2
+  LT: 2
+  S1: 2
+per_sensor_q_stride:
+  ENMAP: [2, 2]
+  DESIS: [2, 2]
+  EMIT: [2, 2]
+  S2: [2, 2]
+  LO: [2, 2]
+  LT: [2, 2]
+  S1: [2, 2]
+per_sensor_mask_unit_size:
+  ENMAP: [4, 4]
+  DESIS: [4, 4]
+  EMIT: [4, 4]
+  S2: [4, 4]
+  LO: [4, 4]
+  LT: [4, 4]
+  S1: [4, 4]
+per_sensor_mask_unit_attn:
+  ENMAP: [true, true, false]
+  DESIS: [true, true, false]
+  EMIT: [true, true, false]
+  S2: [true, true, false]
+  LO: [true, true, false]
+  LT: [true, true, false]
+  S1: [true, true, false]
+per_sensor_num_heads:
+  ENMAP: 2
+  DESIS: 2
+  EMIT: 2
+  S2: 2
+  LO: 2
+  LT: 2
+  S1: 2
+
+# Regularization / normalization.
+mlp_ratio: 4.0
+drop_path_rate: 0.0
+norm_layer: LayerNorm
+head_dropout: 0.0
+head_init_scale: 0.001
+sep_pos_embed: false
+pos_embed_type: learnable
+use_cls_token: false
+
+# Spectral tokenizer settings.
+spectral_groups: 10
+per_sensor_custom_spectral_groups: null
+per_sensor_spectral_groups_file:
+  ENMAP: data/groupings/enmap_15.yaml
+  DESIS: data/groupings/desis_10.yaml
+  EMIT: data/groupings/emit_15.yaml
+  S2: data/groupings/s2_per_band.yaml
+  LO: data/groupings/lo_per_band.yaml
+per_sensor_spectral_groups: null
+spec_depth: 4
+spec_num_heads: 2
+spectral_pos_embed_type: learnable
+spectral_pooling: projected_attention
+spectral_token_dim: 96
+spectral_fusion_dim: 192
+spectral_fusion_heads: 2
+
+# Fusion just before the shared stage.
+fusion_mode: projected_attention
+fusion_attention_heads: 2
+fusion_projection_dim: 768
+
+# Optional canonical sensor used only for downstream single-sensor modules
+# (e.g. segmentation heads eager-initializing decoders). Multimodal pretraining
+# leaves this as null; downstream scripts override it, e.g. ENMAP.
+canonical_sensor: null

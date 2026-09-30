@@ -1,0 +1,13 @@
+_target_: src.decoders.upper_net.UperNet
+
+# UperNet decoder parameters
+channels: 512  # Number of output channels for PSP Module
+output_layers: [3, 5, 7, 11]  # Intermediate layers to extract features from
+pool_scales: [1, 2, 3, 6]  # Average pooling scales for PSP module
+feature_multiplier: 1  # Scales output dimensions of encoder's intermediate layers
+pyramid_output: false  # Whether encoder outputs pyramid of features at different scales
+upscale_method: "bilinear_interpolation"  # Upsampling method
+
+# These will be set dynamically by the model
+num_classes: null  # Will be set by model config
+in_channels: null  # Will be set dynamically from backbone output 

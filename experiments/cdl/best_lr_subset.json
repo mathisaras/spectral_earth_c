@@ -1,0 +1,58 @@
+{
+  "downstream/cdl_lr/dofa_b/finetune/DOFA_ViT_base_e100": {
+    "learning_rate": 3e-05,
+    "weight_decay": 0.0001,
+    "freeze_backbone": false,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/dofa_b/DOFA_ViT_base_e100.pth"
+  },
+  "downstream/cdl_lr/dofa_b/linear/DOFA_ViT_base_e100": {
+    "learning_rate": 0.003,
+    "weight_decay": 1e-05,
+    "freeze_backbone": true,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/dofa_b/DOFA_ViT_base_e100.pth"
+  },
+  "downstream/cdl_lr/dofa_l/finetune/DOFA_ViT_large_e100": {
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "freeze_backbone": false,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/dofa_l/DOFA_ViT_large_e100.pth"
+  },
+  "downstream/cdl_lr/dofa_l/linear/DOFA_ViT_large_e100": {
+    "learning_rate": 0.0003,
+    "weight_decay": 1e-05,
+    "freeze_backbone": true,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/dofa_l/DOFA_ViT_large_e100.pth"
+  },
+  "downstream/cdl_lr/hypersigma_b/finetune/hypersigma_b": {
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "freeze_backbone": false,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/hypersigma_b/hypersigma_b.pth"
+  },
+  "downstream/cdl_lr/hypersigma_b/linear/hypersigma_b": {
+    "learning_rate": 0.001,
+    "weight_decay": 1e-05,
+    "freeze_backbone": true,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/hypersigma_b/hypersigma_b.pth"
+  },
+  "downstream/cdl_lr/hypersigma_l/finetune/hypersigma_l": {
+    "learning_rate": 0.0003,
+    "weight_decay": 0.0001,
+    "freeze_backbone": false,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/hypersigma_l/hypersigma_l.pth"
+  },
+  "downstream/cdl_lr/hypersigma_l/linear/hypersigma_l": {
+    "learning_rate": 0.001,
+    "weight_decay": 1e-05,
+    "freeze_backbone": true,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/hypersigma_l/hypersigma_l.pth"
+  }
+}

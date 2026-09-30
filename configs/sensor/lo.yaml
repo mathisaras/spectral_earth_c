@@ -1,0 +1,26 @@
+# Landsat OLI (Operational Land Imager) Sensor Configuration
+name: lo
+path_name: l8  # Downstream task folders still use the legacy 'l8' directory name.
+num_bands: 7  # Coastal, Blue, Green, Red, NIR, SWIR1, SWIR2
+num_bands_raw: 7
+
+rgb_indices: [3, 2, 1]  # Band 4 (Red), Band 3 (Green), Band 2 (Blue) (0-indexed)
+
+# Normalization parameters - Harmonization to Sentinel-2 scale
+normalization:
+  type: harmonize  # scale | harmonize | thermal | sar
+  slope: 0.275
+  bias: -2000.0
+  scale: 10000.0  # Final division after harmonization
+
+spectral:
+  domain: optical_multispectral
+  channel_view: stored_processed
+  wavelength_unit: nm
+  raw_band_metadata_path: configs/sensor/metadata/lo_processed.csv
+  processed_band_metadata_path: configs/sensor/metadata/lo_processed.csv
+
+# Optional metadata
+resolution: 30  # meters
+img_size: 128
+band_names: ["Coastal", "Blue", "Green", "Red", "NIR", "SWIR1", "SWIR2"]

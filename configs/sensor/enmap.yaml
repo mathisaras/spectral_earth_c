@@ -1,0 +1,22 @@
+# EnMAP (Environmental Mapping and Analysis Program) Sensor Configuration
+name: enmap
+# `num_bands` corresponds to the processed 202-band view used by the model.
+num_bands: 202
+num_bands_raw: 224
+rgb_indices: [43, 28, 10]  # Processed-band indices for ~640nm / ~550nm / ~470nm
+
+# Normalization parameters
+normalization:
+  type: scale  # scale | harmonize | thermal | sar
+  scale: 30000.0  # confirmed safe: real combined EnMAP max 24723.0
+
+spectral:
+  domain: optical_hyperspectral
+  channel_view: stored_prefiltered
+  wavelength_unit: nm
+  raw_band_metadata_path: configs/sensor/metadata/enmap_raw.csv
+  processed_band_metadata_path: configs/sensor/metadata/enmap_processed.csv
+
+# Optional metadata
+resolution: 30  # meters
+img_size: 128

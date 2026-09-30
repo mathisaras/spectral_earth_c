@@ -1,0 +1,44 @@
+# @package _global_
+
+defaults:
+  - override /data: hyperview
+  - override /sensor: hyperview
+  - override /model: regression
+  - override /trainer: ddp_2
+  - override /paths: default
+  - override /logger: wandb
+  - override /backbone@model.backbone_config: spec_vit_s
+
+
+tags: [ "downstream", "hyperview", "regression"]
+
+# RegressionModule parameter overrides
+model:  
+  t_max: 400
+  in_channels: 150
+
+data:
+  batch_size: 32
+  num_workers: 8
+  root: ${paths.data_dir}/hyperview
+
+trainer:
+  max_epochs: 400
+
+experiment_setup: "hyperview"
+protocol: null
+weight_init: random
+backbone_name: null
+
+task_name: >-
+  downstream
+  /${experiment_setup}
+  /${data.sensor.name}
+  /${backbone_name}
+  /${protocol}
+  /${weight_init}
+
+logger:
+  wandb:
+    group: ${task_name}
+    project: "downstream_${experiment_setup}" 

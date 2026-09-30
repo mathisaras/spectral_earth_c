@@ -1,0 +1,15 @@
+groups:
+- [0, 9]
+- [1, 2, 3]
+- [4, 5, 6]
+- [7, 8]
+- [10, 11]
+meta:
+  sensor: S2
+  group_names:
+  - Atmospheric (B1+B9)
+  - Visible (B2+B3+B4)
+  - Red Edge (B5+B6+B7)
+  - NIR (B8+B8A)
+  - SWIR (B11+B12)
+  n_groups: 5

@@ -1,0 +1,25 @@
+_target_: src.datamodules.enmap_tree_datamodule.EnMAPTreeDataModule
+
+defaults:
+  - /sensor@sensor_config: enmap  
+
+product: "enmap_tree"
+
+root: /dss/dsstbyfs02/pn49cu/pn49cu-dss-0001/mathi/final_patches/enmap_tree
+split_root: data/splits
+
+apply_input_normalization: true
+standardize: true
+standardization_mode: bandwise
+standardization_stats_path: data/enmap_combined_statistics
+standardization_eps: 1.0e-6
+target_sensor_config: null
+
+classes: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 14, 17, 18]
+
+raw_mask: false
+
+batch_size: 16
+img_size: ${data.sensor_config.img_size}
+num_workers: 8
+train_random_resized_crop_scale: [0.4, 1.0]

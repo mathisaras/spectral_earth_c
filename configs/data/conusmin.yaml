@@ -1,0 +1,26 @@
+# configs/data/conusmin.yaml
+_target_: src.datamodules.conusmin_datamodule.ConusminDataModule  
+
+defaults:
+  - /sensor@sensor_config: emit  
+
+num_classes: 18  
+return_mask: false
+product: "conusmin"  
+
+# sensor: ${sensor}
+
+# General parameters
+root: /dss/dsstbyfs02/pn49cu/pn49cu-dss-0001/mathi/final_patches/emit_conusmin
+apply_input_normalization: true
+standardize: true
+standardization_mode: bandwise
+standardization_stats_path: data/emit_combined_statistics
+standardization_eps: 1.0e-6
+target_sensor_config: null
+batch_size: 16
+
+# Patch size (output image size from dataloader)
+img_size: 128
+num_workers: 12
+subset_percent: 1.0  # Use all samples by default

@@ -1,0 +1,48 @@
+# @package _global_
+
+defaults:
+  - override /data: spectral_earth_mm_zarr
+  - override /model: multimodal_lejepa
+  - override /backbone@model.backbone_config: multi_sensor_two_stages_hiera_b
+  - override /callbacks: self_supervised
+  - override /trainer: ddp_ssl
+  - override /logger: wandb
+
+tags: ["pretrain", "multimodal_lejepa", "spectral_earth_mm", "zarr_mm"]
+
+seed: 12345
+
+data:
+  batch_size: 16
+  sensors: ["ENMAP", "DESIS", "EMIT", "S2", "LO", "LT", "S1"]
+  groups: null
+  num_temporal_views: 1
+  normalize: false
+  spatial_aug_p: 0.0
+  radiometric_aug_p: 0.0
+  sensor_drop_prob: 0.0
+  min_sensors: 1
+  num_workers: 6
+
+model:
+  global_modalities_per_view: 4
+  local_modalities_per_view: 1
+  n_local_views: 4
+
+trainer:
+  max_epochs: 200
+  precision: 16-mixed
+  strategy: ddp_find_unused_parameters_true
+
+backbone_name: multi_sensor_two_stages_hiera_b
+
+task_name: ssl_pretrain/spectral_earth_mm/mm_lejepa/${backbone_name}
+
+logger:
+  wandb:
+    tags: ${tags}
+    group: ${task_name}
+    project: ssl_pretrain_spectral_earth_mm
+    offline: false
+  aim:
+    experiment: ${task_name}

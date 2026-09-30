@@ -1,0 +1,60 @@
+# @package _global_
+# DINO pretrain with Spectral Earth Multi-Modal Zarr (single sensor, e.g. ENMAP).
+# DataModule returns raw data; DINO applies its own normalization and augmentation.
+
+defaults:
+  - override /data: spectral_earth_mm_zarr.yaml
+  - override /model: dino.yaml
+  - override /backbone@model.backbone_config: spec_vit_b
+  - override /sensor@model.sensor_config: enmap
+  - override /callbacks: self_supervised.yaml
+  - override /trainer: ddp_ssl.yaml
+  - override /logger: wandb.yaml
+
+tags: [ "pretrain", "dino", "enmap", "mm_zarr" ]
+
+seed: 12345
+
+# -----------------------------------------------------------------------------
+# DATA: Spectral Earth MM Zarr, single sensor, no datamodule aug/norm
+# -----------------------------------------------------------------------------
+data:
+  batch_size: 32
+  sensors: [ "ENMAP" ]  # Only ENMAP; batch will have key "ENMAP" (or image1/image2 if num_temporal_views=2)
+  groups: null     # Use all groups that contain ENMAP
+  num_temporal_views: 2  # Return 2 temporal views as image1/image2 for DINO
+  normalize: false  # DINO does its own normalization
+  spatial_aug_p: 0  # DINO does its own augmentation
+  radiometric_aug_p: 0
+  sensor_drop_prob: 0
+  sampling_weights: null
+  num_workers: 5
+
+# -----------------------------------------------------------------------------
+# MODEL: DINO (sensor_config from model defaults: /sensor@sensor_config: enmap)
+# -----------------------------------------------------------------------------
+model:
+  hidden_dim: 2048
+  bottleneck_dim: 256
+  output_dim: 128
+  lr: 0.0001
+  warmup_epochs: 20
+  weight_decay: 1e-5
+  momentum: 0.9
+  multicrop: false
+  n_views: 0
+
+trainer:
+  max_epochs: 100
+
+backbone_name: spec_vit_b
+
+task_name: ssl_pretrain/spectral_earth_mm/${sensor.name}/dino/${backbone_name}
+
+logger:
+  wandb:
+    tags: ${tags}
+    group: ${task_name}
+    project: ssl_pretrain_spectral_earth_mm
+  aim:
+    experiment: ${task_name}

@@ -1,0 +1,15 @@
+# https://hydra.cc/docs/configure_hydra/intro/
+
+# Use Hydra's built-in logging configs so runs do not depend on the optional
+# `hydra-colorlog` plugin being installed in the current environment.
+defaults:
+  - override hydra_logging: default
+  - override job_logging: default
+
+# output directory, generated dynamically on each run
+run:
+  dir: ${paths.log_dir}/${task_name}/runs/${now:%Y-%m-%d}_${now:%H-%M-%S}
+sweep:
+  dir: ${paths.log_dir}/${task_name}/multiruns/${now:%Y-%m-%d}_${now:%H-%M-%S}
+  subdir: ${hydra.job.override_dirname}
+  #subdir: ${hydra.job.num}

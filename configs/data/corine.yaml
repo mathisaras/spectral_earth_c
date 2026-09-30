@@ -1,0 +1,27 @@
+# configs/data/corine.yaml
+_target_: src.datamodules.corine_datamodule.CorineDataModule
+
+defaults:
+  - /sensor@sensor_config: enmap
+
+num_classes: 19  
+return_mask: false  
+product: "corine"
+
+# sensor: ${sensor}
+
+# General parameters
+root: ${paths.data_dir}
+apply_input_normalization: true
+standardize: false
+standardization_mode: bandwise
+standardization_stats_path: null
+standardization_eps: 1.0e-6
+target_sensor_config: null
+batch_size: 128
+
+# Patch size (output image size from dataloader)
+img_size: ${data.sensor_config.img_size}
+
+num_workers: 12
+subset_percent: 1.0  # Use all samples by default

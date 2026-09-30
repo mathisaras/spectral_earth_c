@@ -1,0 +1,9 @@
+{
+  "task": "oxhyperminerals_emit_l2a",
+  "sensor": "emit",
+  "mode": "meanstd",
+  "batches": 1220,
+  "pixels_per_band": 19984384,
+  "resize": false,
+  "output_dir": "data/stats/comparison/raw_meanstd/emit"
+}

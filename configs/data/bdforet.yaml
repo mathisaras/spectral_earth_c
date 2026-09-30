@@ -1,0 +1,30 @@
+# configs/data/bdforet.yaml
+_target_: src.datamodules.bdforet_datamodule.BDForetDataModule
+
+defaults:
+  - /sensor@sensor_config: enmap
+
+product: "bdforet"
+# Dataset-specific parameters
+classes: [0, 1, 2, 3, 4, 5, 7, 9, 10, 11, 12, 14, 16]
+
+# Reference to sensor config which will be injected by hydra
+# sensor: ${sensor}
+
+# General parameters
+root: ${paths.data_dir}
+split_root: data/splits
+apply_input_normalization: true
+standardize: false
+standardization_mode: bandwise
+standardization_stats_path: null
+standardization_eps: 1.0e-6
+target_sensor_config: null
+batch_size: 32
+
+# Patch size (output image size from dataloader)
+img_size: ${data.sensor_config.img_size}
+
+num_workers: 8
+
+# Note: root is currently an absolute path. 

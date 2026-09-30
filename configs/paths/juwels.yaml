@@ -1,0 +1,15 @@
+defaults:
+  - default.yaml
+
+
+data_dir: /p/scratch/hai_1025/downstream_tasks/
+#/p/project1/hai_1035/spectral_earth/downstream_tasks/
+
+se_dir: /p/project1/hai_ssr_msi/data/
+
+log_dir: logs
+disable_wandb_osh: true
+
+zarr_path: /p/scratch/hai_eogfm/spectral_earth_200k_full_v2.zarr
+
+standardization_stats_dir: data/stats/mm_full_flat_normalized_random_single

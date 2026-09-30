@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+*_backup/
+*backup*/
+wandb/
+outputs/
+multirun/
+.hydra/
+pretrained_weights/
+pt_wt/
+pretrained_models/
+*.pth
+*.ckpt
+*.log
+oxhyper_iou.txt

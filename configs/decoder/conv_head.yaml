@@ -1,0 +1,4 @@
+_target_: src.decoders.conv_head.ConvHead
+num_input_features: null  # Will be set dynamically from backbone
+num_classes: null  # Will be set by model config
+patch_size: ${model.backbone_config.patch_size}

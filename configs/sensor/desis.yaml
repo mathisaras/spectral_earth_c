@@ -1,0 +1,30 @@
+# DESIS (DLR Earth Sensing Imaging Spectrometer) Sensor Configuration
+name: desis
+# `num_bands` is always the processed channel view seen by the model.
+num_bands: 215  # After trimming noisy edge bands (235 raw - 10 start - 10 end)
+num_bands_raw: 235  # Original band count on disk before trimming
+rgb_indices: [40, 25, 10]  # Processed-band indices for approximate R/G/B
+
+# Normalization parameters
+normalization:
+  type: scale  # scale | harmonize | thermal | sar
+  scale: 10000.0  # 0-10000 -> 0-1
+
+# Band trimming - removes noisy edge bands
+band_trim:
+  trim_start: 10  # Remove first 10 bands
+  trim_end: 10    # Remove last 10 bands
+
+# Canonical wavelength metadata.
+# Raw metadata describes the on-disk 235-band stack.
+# Processed metadata describes the post-trim 215-band view that reaches the model.
+spectral:
+  domain: optical_hyperspectral
+  channel_view: processed_after_band_trim
+  wavelength_unit: nm
+  raw_band_metadata_path: configs/sensor/metadata/desis_raw.csv
+  processed_band_metadata_path: configs/sensor/metadata/desis_processed.csv
+
+# Optional metadata
+resolution: 30  # meters
+img_size: 128

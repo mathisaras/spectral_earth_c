@@ -1,0 +1,23 @@
+{
+  "downstream/hyperview_lr/spec_vit_base/finetune/mae": {
+    "learning_rate": 1e-05,
+    "weight_decay": 0.001,
+    "freeze_backbone": false,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/spec_vit_b/mae.pth"
+  },
+  "downstream/hyperview_lr/spec_vit_base/finetune_adapter/mae": {
+    "learning_rate": 1e-05,
+    "weight_decay": 0.001,
+    "freeze_backbone": true,
+    "finetune_adapter": true,
+    "pretrained_weights": "./pretrained_models/spec_vit_b/mae.pth"
+  },
+  "downstream/hyperview_lr/spec_vit_base/linear/mae": {
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "freeze_backbone": true,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/spec_vit_b/mae.pth"
+  }
+}

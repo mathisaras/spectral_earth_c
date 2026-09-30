@@ -1,0 +1,9 @@
+_target_: src.backbones.timm_wrapper.TimmViTBackbone
+# the name of the model in the timm config
+model_name: "vit_base_patch16_224"
+pretrained: false
+in_chans: ${sensor.num_bands}  # Dynamically set from sensor config
+img_size: ${sensor.img_size} # This is the training image size, vit_base_patch16_224 implies 224. MAE crops to this.
+patch_size: 4   # This is the ViT's patch size, e.g. results in 128/4 = 32x32 patches.
+num_classes: 0 
+name: vit_b

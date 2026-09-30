@@ -1,0 +1,51 @@
+# @package _global_
+
+defaults:
+  - override /data: enmap_tree
+  - override /sensor: enmap
+  - override /sensor@data.sensor_config: enmap
+  - override /model: segmentation
+  - override /trainer: ddp
+  - override /paths: default
+  - override /logger: wandb
+  - override /backbone@model.backbone_config: spec_vit_s
+  - override /decoder@model.decoder_config: conv_head 
+
+
+tags: [ "downstream", "enmap_tree", "segmentation"]
+
+# SemanticSegmentationModule parameter overrides
+model:  
+  num_classes: 14
+  ignore_index: 14
+  model_type: "vit_seg"
+  learning_rate: 1e-3
+  weight_decay: 1e-4
+  t_max: ${trainer.max_epochs}
+  eta_min: 1e-6
+  rgb_indices: [43, 28, 10]
+
+decoder:
+  num_classes: ${model.num_classes}
+
+# DataModule parameter overrides
+data:
+  batch_size: 8
+  num_workers: 4
+  root: /dss/dsstbyfs02/pn49cu/pn49cu-dss-0001/mathi/final_patches/enmap_tree
+
+trainer:
+  max_epochs: 100
+
+experiment_setup: "enmap_tree"
+protocol: null
+weight_init: random
+backbone_name: null
+decoder_name: null
+
+task_name: downstream/${experiment_setup}/${sensor.name}/${decoder_name}/${backbone_name}/${protocol}/${weight_init}
+
+logger:
+  wandb:
+    group: ${task_name}
+    project: "downstream_${experiment_setup}"

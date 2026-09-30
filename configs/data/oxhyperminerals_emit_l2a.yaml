@@ -1,0 +1,39 @@
+_target_: src.datamodules.oxhyperminerals_emit_l2a_datamodule.OxHyperMineralsEMITL2ADataModule
+
+defaults:
+  - /sensor@sensor_config: emit
+
+product: "oxhyperminerals_emit_l2a"
+label_product: "minerals3ghk"
+class_names: ["Goethite", "Hematite", "Kaolinite"]
+
+# Multi-label target bands on disk:
+# minerals3ghk -> [Goethite, Hematite, Kaolinite]
+# minerals10   -> [Calcite, Chlorite, Dolomite, Goethite, Gypsum, Hematite,
+#                  Illite+Muscovite, Kaolinite, Montmorillonite, Vermiculite]
+#
+# Pixels may activate multiple mineral bands simultaneously.
+classes: [0, 1, 2]
+raw_ignore_value: 255
+ignore_value: -1.0
+invalid_value: -9999.0
+image_fill_value: 0.0
+
+# Patchify script output root. Keep it relative to the active paths profile so
+# JUWELS / Terrabyte can point at different storage locations cleanly.
+root: ${paths.data_dir}/oxhyperminerals_emit_l2a_author64_valid99
+split_root: data/splits
+
+apply_input_normalization: true
+standardize: false
+standardization_mode: bandwise
+standardization_stats_path: null
+standardization_eps: 1.0e-6
+target_sensor_config: null
+
+batch_size: 16
+img_size: 64
+num_workers: 4
+
+num_classes: 3
+ignore_index: null

@@ -1,0 +1,15 @@
+# Legacy 2-node launcher. Prefer slurm_long + hydra.launcher.nodes=N override.
+defaults: 
+  - submitit_slurm
+  
+submitit_folder: ${hydra.sweep.dir}/.submitit/%j
+timeout_min: 7000
+partition: hpda2_compute_gpu
+nodes: 2
+tasks_per_node: 4
+cpus_per_task: 16
+gpus_per_node: 4
+account: pn52pi-c
+
+exclude: hpdar04c04s02
+

@@ -1,0 +1,5 @@
+_target_: src.backbones.hypersigma.hypersigma_b
+img_size: 128
+in_chans: ${data.sensor_config.num_bands}
+patch_size: 8
+pretrained: null  # Will be set by model config 

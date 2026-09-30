@@ -1,0 +1,7 @@
+_target_: src.datamodules.hyperview.HyperviewDataModule
+root: /dss/dsstbyfs02/pn49cu/pn49cu-dss-0001/enmap_data_final/hyperview_new
+data_dir: images
+num_bands: 150
+batch_size: 16
+img_size: 128
+num_workers: 8

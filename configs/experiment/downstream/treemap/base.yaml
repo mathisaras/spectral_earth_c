@@ -1,0 +1,49 @@
+# @package _global_
+
+defaults:
+  - override /data: treemap
+  - override /sensor@data.sensor_config: enmap
+  - override /model: segmentation
+  - override /trainer: ddp
+  - override /paths: default
+  - override /logger: wandb
+  - override /backbone@model.backbone_config: spec_vit_s
+  - override /decoder@model.decoder_config: conv_head 
+
+
+tags: [ "downstream", "treemap", "segmentation"]
+
+# SemanticSegmentationModule parameter overrides
+model:  
+  num_classes: 24
+  ignore_index: 24
+  model_type: "vit_seg"
+  learning_rate: 1e-3
+  weight_decay: 1e-4
+  t_max: ${trainer.max_epochs}
+  eta_min: 1e-6
+
+decoder:
+  num_classes: ${model.num_classes}
+
+# DataModule parameter overrides
+data:
+  batch_size: 16
+  num_workers: 4
+  root: ${paths.data_dir}/treemap
+
+trainer:
+  max_epochs: 100
+
+experiment_setup: "treemap"
+protocol: null
+weight_init: random
+backbone_name: null
+decoder_name: null
+
+task_name: downstream/${experiment_setup}/${data.sensor_config.name}/${decoder_name}/${backbone_name}/${protocol}/${weight_init}
+
+logger:
+  wandb:
+    group: ${task_name}
+    project: "downstream_${experiment_setup}" 

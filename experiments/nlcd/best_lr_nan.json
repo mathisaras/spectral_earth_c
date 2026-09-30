@@ -1,0 +1,9 @@
+{
+  "downstream/nlcd_lr/spec_resnet50/finetune/dino": {
+    "learning_rate": 0.003,
+    "weight_decay": 0.0001,
+    "freeze_backbone": false,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/spec_rn50/dino.pth"
+  }
+}

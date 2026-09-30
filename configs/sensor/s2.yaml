@@ -1,0 +1,22 @@
+# Sentinel-2 (S2) MSI Sensor Configuration
+name: s2
+num_bands: 12  # Using the 12 main spectral bands (B1-B8, B8A, B9, B11, B12). B10 (SWIR Cirrus) often omitted.
+num_bands_raw: 12
+rgb_indices: [3, 2, 1]  # B4 (Red), B3 (Green), B2 (Blue) (0-indexed from the 12 bands)
+
+# Normalization parameters
+normalization:
+  type: scale  # scale | harmonize | thermal | sar
+  scale: 10000.0  # 0-10000 -> 0-1
+
+spectral:
+  domain: optical_multispectral
+  channel_view: stored_processed
+  wavelength_unit: nm
+  raw_band_metadata_path: configs/sensor/metadata/s2_processed.csv
+  processed_band_metadata_path: configs/sensor/metadata/s2_processed.csv
+
+# Optional metadata
+resolution: 10  # meters for RGB/NIR, 20m for others, 60m for coastal/SWIR cirrus
+img_size: 384  # common size used for S2 patches
+band_names: ["B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B8A", "B9", "B11", "B12"]

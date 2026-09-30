@@ -1,0 +1,20 @@
+# PRISMA Sensor Configuration
+name: prisma
+num_bands: 233
+num_bands_raw: 233
+rgb_indices: [33, 44, 55]  
+
+normalization:
+  type: scale
+  scale: 70000.0  # matches prisma_statistics_normalized computation
+
+spectral:
+  domain: optical_hyperspectral
+  channel_view: stored_prefiltered
+  wavelength_unit: nm
+  raw_band_metadata_path: configs/sensor/metadata/prisma_raw.csv        
+  processed_band_metadata_path: configs/sensor/metadata/prisma_processed.csv  
+
+# Optional metadata
+resolution: 30  
+img_size: 128    

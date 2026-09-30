@@ -1,0 +1,7 @@
+defaults:
+  - oxhyperminerals_emit_l2a
+  - _self_
+
+# Precomputed random-patch subset split.
+split_dir: data/splits/oxhyperminerals_emit_l2a/random_patch_f0p2_minerals3ghk_seed42
+split_name: random_patch_f0p2_minerals3ghk_seed42

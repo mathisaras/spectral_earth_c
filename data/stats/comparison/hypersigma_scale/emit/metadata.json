@@ -1,0 +1,7 @@
+{
+  "task": "oxhyperminerals_emit_l2a",
+  "sensor": "emit",
+  "mode": "constant_scale",
+  "scale": 32767.0,
+  "output_dir": "data/stats/comparison/hypersigma_scale/emit"
+}

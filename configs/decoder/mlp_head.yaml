@@ -1,0 +1,6 @@
+_target_: src.decoders.mlp_head.MLPHead
+input_dim: null  # Will be set dynamically from backbone
+hidden_dims: [2048, 1024]
+output_dim: null  # Will be set by model config
+dropout: 0.1
+activation: "relu" 

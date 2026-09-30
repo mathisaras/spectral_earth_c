@@ -1,0 +1,57 @@
+# @package _global_
+# MoCo pretrain with Spectral Earth Multi-Modal Zarr (single sensor, e.g. ENMAP).
+# DataModule returns raw data; MoCo applies its own normalization and augmentation.
+
+defaults:
+  - override /data: spectral_earth_mm_zarr.yaml
+  - override /model: moco.yaml
+  - override /backbone@model.backbone_config: spec_vit_b
+  - override /sensor@model.sensor_config: enmap
+  - override /callbacks: self_supervised.yaml
+  - override /trainer: ddp_ssl.yaml
+  - override /logger: wandb.yaml
+
+tags: [ "pretrain", "moco", "enmap", "zarr_mm" ]
+
+seed: 12345
+
+# -----------------------------------------------------------------------------
+# DATA: Spectral Earth MM Zarr, single sensor, no datamodule aug/norm
+# -----------------------------------------------------------------------------
+data:
+  batch_size: 32
+  sensors: [ "ENMAP" ]  # Only ENMAP; batch will have key "ENMAP" (or image1/image2 if num_temporal_views=2)
+  groups: null     # Use all groups that contain ENMAP
+  num_temporal_views: 2  # Return 2 temporal views as image1/image2 for MoCo
+  normalize: false  # MoCo does its own normalization
+  spatial_aug_p: 0  # MoCo does its own augmentation
+  radiometric_aug_p: 0
+  sensor_drop_prob: 0
+  sampling_weights: null
+  num_workers: 5
+
+# -----------------------------------------------------------------------------
+# MODEL: MoCo (sensor_config from model defaults: /sensor@sensor_config: enmap)
+# -----------------------------------------------------------------------------
+model:
+  freeze_patch_embed: true
+  lr: 0.0001
+  temperature: 0.1
+  weight_decay: 0.0001
+  memory_bank_size: 32768
+  moco_momentum: 0.996
+
+trainer:
+  max_epochs: 100
+
+backbone_name: spec_vit_b
+
+task_name: ssl_pretrain/spectral_earth_mm/${sensor.name}/moco/${backbone_name}
+
+logger:
+  wandb:
+    tags: ${tags}
+    group: ${task_name}
+    project: ssl_pretrain_spectral_earth_mm
+  aim:
+    experiment: ${task_name}

@@ -1,0 +1,54 @@
+_recursive_: false
+
+defaults:
+  - /backbone@backbone_config: multi_sensor_two_stages_hiera_b
+  - _self_
+
+_target_: src.models.multimodal_lejepa.MultimodalLeJEPAModule
+
+modality_channels:
+  ENMAP: 202
+  DESIS: 215
+  EMIT: 244
+  S2: 12
+  LO: 7
+  LT: 1
+  S1: 2
+
+output_dim: 128
+projector_hidden_dim: 2048
+projector_num_layers: 3
+projector_use_bn: true
+lamb: 0.015
+invariance_mode: coupled_center
+ema_teacher_enabled: true
+teacher_momentum_start: 0.996
+teacher_momentum_end: 1.0
+
+global_views: 2
+global_modalities_per_view: 4
+n_local_views: 4
+local_modalities_per_view: 1
+local_modalities_from_global_only: true
+local_excluded_modalities: [S1, LT]
+
+apply_input_normalization: true
+standardize_modalities: [S2, LO, S1]
+standardization_mode: bandwise
+standardization_stats_path: ${paths.standardization_stats_dir}
+standardization_eps: 1.0e-6
+global_crop_scale: [0.4, 1.0]
+local_crop_scale: [0.1, 0.4]
+radiometric_aug_p: 0.5
+radiometric_brightness_range: [0.8, 1.2]
+radiometric_bias_range: [-0.1, 0.1]
+
+sigreg_knots: 17
+sigreg_t_max: 3.0
+sigreg_num_vectors: 256
+sigreg_gather_distributed: true
+
+lr: 0.00001
+weight_decay: 0.05
+warmup_epochs: 20
+max_epochs: ${trainer.max_epochs}

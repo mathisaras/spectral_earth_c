@@ -1,0 +1,24 @@
+# Gaofen-5 AHSI released 116-band tensor configuration
+name: gaofen5
+# The released dataset only exposes the inferred 116-band view used downstream.
+num_bands: 116
+num_bands_raw: 116
+rgb_indices: [23, 13, 5]  # Approximate R/G/B centers near 647 / 548 / 469 nm
+
+# Released values already appear reflectance-scaled; keep them as-is.
+normalization:
+  type: scale  # scale | harmonize | thermal | sar
+  scale: 1.0
+
+spectral:
+  domain: optical_hyperspectral
+  channel_view: stored_prefiltered
+  wavelength_unit: nm
+  # The original 330-band GF-5 AHSI layout is unavailable in this release, so the
+  # same inferred 116-band metadata is used for both raw and processed views.
+  raw_band_metadata_path: configs/sensor/metadata/gaofen5_processed.csv
+  processed_band_metadata_path: configs/sensor/metadata/gaofen5_processed.csv
+
+# Optional metadata
+resolution: 30  # approximate native GF-5 HSI ground sampling distance
+img_size: 128

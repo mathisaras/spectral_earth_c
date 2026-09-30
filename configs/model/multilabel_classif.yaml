@@ -1,0 +1,33 @@
+_target_: src.models.multilabel_classification_module.MultiLabelClassificationModule
+
+_recursive_: false 
+
+
+defaults:
+  - /backbone@backbone_config: spec_vit_s # Default backbone choice
+  - /sensor@sensor_config: enmap
+  - _self_   
+
+
+num_classes: ${data.num_classes} # Example: 19, should ideally come from data config
+
+# Path to pretrained weights for the backbone (can be an S3 path or local)
+# This is separate from backbone_config.pretrained which timm might use for its own pretrained models.
+# Set to null if no external weights are to be loaded into the backbone post-instantiation.
+pretrained_weights: null 
+
+loss: "bce"
+learning_rate: 1e-3
+weight_decay: 1e-5
+
+freeze_backbone: False
+finetune_adapter: False # Added for completeness, default is False
+finetune_first_n_layers: 0 # Added for completeness, default is 0
+
+# Scheduler params
+t_max: 100
+eta_min: 0
+
+# Removed: These are now expected to be part of the backbone_config if needed by the backbone
+# in_channels: ${data.num_bands}
+# backbone: "spec_resnet50" # Replaced by backbone_config

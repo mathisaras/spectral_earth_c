@@ -1,0 +1,44 @@
+# @package _global_
+
+defaults:
+  - override /data: conusmin  
+  - override /sensor: emit  
+  - override /sensor@data.sensor_config: emit 
+  - override /model: multilabel_classif
+  - override /trainer: ddp
+  - override /paths: default
+  - override /logger: wandb
+  - override /backbone@model.backbone_config: spec_vit_s
+
+
+tags: [ "downstream", "conusmin", "classification"]  
+
+# MultiLabelClassificationModule parameter overrides
+model:
+  backbone_config:
+    img_size: 128
+  num_classes: 18  
+  learning_rate: 1e-3
+  weight_decay: 1e-5
+  t_max: ${trainer.max_epochs}
+  eta_min: 0
+
+data:
+  batch_size: 32
+
+trainer:
+  devices: 1
+  strategy: auto
+  max_epochs: 100
+
+experiment_setup: "conusmin"  
+protocol: null
+weight_init: random
+backbone_name: null
+
+task_name: downstream/${experiment_setup}/${sensor.name}/${backbone_name}/${protocol}/${weight_init}
+
+logger:
+  wandb:
+    group: ${task_name}
+    project: "${experiment_setup}"

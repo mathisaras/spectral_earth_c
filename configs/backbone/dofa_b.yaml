@@ -1,0 +1,10 @@
+_target_: src.backbones.dofa_encoder.DofaBasePatch16
+encoder_weights: null  # Will be set by model config
+input_bands: null  # Will be set by model config
+input_size: 224
+patch_size: 16
+output_layers: [11]
+wave_list: null  # Will be set by sensor config
+sensor: ${data.sensor_config.name}
+sensor_config_name: ${data.sensor_config.name}
+use_norm: false 

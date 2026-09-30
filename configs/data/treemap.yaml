@@ -1,0 +1,26 @@
+# configs/data/treemap.yaml
+_target_: src.datamodules.treemap_datamodule.TreeMapDataModule
+
+defaults:
+  - /sensor@sensor_config: enmap
+
+# Dataset-specific parameters
+classes: [0, 184, 185, 221, 924, 105, 503, 520, 706, 801, 201, 264, 266, 281, 301, 901, 406, 923, 142, 161, 602, 607, 608, 267, 371]
+
+
+# General parameters
+root: ${paths.data_dir}
+split_root: data/splits
+apply_input_normalization: true
+standardize: false
+standardization_mode: bandwise
+standardization_stats_path: null
+standardization_eps: 1.0e-6
+target_sensor_config: null
+batch_size: 64
+img_size: ${data.sensor_config.img_size}
+num_workers: 4
+
+product: "treemap" # Or a more specific product name if used by the dataset
+raw_mask: false
+# Note: root is currently an absolute path. Consider changing to ${paths.data_dir}/some_subdir for portability. 

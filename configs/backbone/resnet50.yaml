@@ -1,0 +1,6 @@
+_target_: src.backbones.timm_wrapper.TimmResNetBackbone
+model_name: "resnet50"
+pretrained: false
+in_chans: ${data.sensor.num_bands} # Dynamically set from sensor config
+num_classes: 0
+replace_stride_with_dilation: [false, false, false, false] 

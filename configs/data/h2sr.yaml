@@ -1,0 +1,38 @@
+# configs/data/h2sr.yaml
+_target_: src.datamodules.h2sr_datamodule.H2SRDataModule
+
+defaults:
+  - /sensor@sensor_config: ammis
+
+product: "h2sr"
+# Dataset-specific parameters
+# Raw label ids on disk:
+# 0 Paddy field
+# 1 Dry farmland
+# 2 Forest land
+# 3 Grassland
+# 4 Building
+# 5 Highway
+# 6 Greenhouse
+# 7 Water body
+# Background is encoded separately as raw value 15 and remapped to ignore_index.
+classes: [0, 1, 2, 3, 4, 5, 6, 7]
+background_value: 15
+
+# General parameters
+root: ${paths.data_dir}/h2sr
+split_root: data/splits
+apply_input_normalization: true
+standardize: false
+standardization_mode: bandwise
+standardization_stats_path: null
+standardization_eps: 1.0e-6
+target_sensor_config: null
+batch_size: 32
+
+# Output spatial size used by the datamodule.
+# If this stays null, BaseSegmentationDataModule resolves it from the effective
+# sensor config: target sensor when remapping, source AMMIS otherwise.
+img_size: null
+
+num_workers: 8

@@ -1,0 +1,25 @@
+_target_: src.datamodules.cdl_datamodule.CDLDataModule
+
+defaults:
+  - /sensor@sensor_config: desis
+
+product: "cdl"
+
+# Copied legacy DESIS CDL data into downstream_tasks to match the current
+# sensor/product folder layout expected by the shared segmentation stack.
+root: ${paths.data_dir}/desis_cdl/
+split_root: data/splits
+apply_input_normalization: true
+standardize: false
+standardization_mode: bandwise
+standardization_stats_path: null
+standardization_eps: 1.0e-6
+target_sensor_config: null
+
+# Match the current downstream CDL class setup.
+classes: [0, 1, 2, 3, 4, 5, 6, 45, 54, 69, 72, 75, 76, 204, 210]
+
+raw_mask: false
+batch_size: 8
+img_size: ${data.sensor_config.img_size}
+num_workers: 8

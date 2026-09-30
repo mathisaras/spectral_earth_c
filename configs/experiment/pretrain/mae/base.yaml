@@ -1,0 +1,45 @@
+# @package _global_
+
+defaults:
+  - override /data: spectral_earth_mm_zarr
+  - override /model: mae
+  - override /backbone@model.backbone_config: spec_vit_b
+  - override /sensor@model.sensor_config: enmap
+  - override /callbacks: self_supervised
+  - override /trainer: ddp_ssl
+  - override /logger: wandb
+
+tags: [ "pretrain", "mae", "enmap", "zarr_mm"]
+
+seed: 12345
+
+data:
+  batch_size: 32
+  sensors: [ "ENMAP" ]  # Only ENMAP; batch will have key "ENMAP" (or image1/image2 if num_temporal_views=2)
+  groups: null     # Use all groups that contain ENMAP
+  sampling_weights: null
+  num_workers: 5
+
+model:
+  T_max: 200
+  mask_ratio: 0.9
+  weight_decay: 0.01
+
+trainer:
+  max_epochs: 200
+  precision: 16-mixed
+  strategy: ddp_find_unused_parameters_true
+
+backbone_name: spec_vit_b
+
+task_name: ssl_pretrain/spectral_earth_mm/${sensor.name}/mae_${model.mask_ratio}/${backbone_name}
+
+logger:
+  wandb:
+    tags: ${tags}
+    group: ${task_name}
+    project: ssl_pretrain_spectral_earth_mm
+    offline: False
+  aim:
+    experiment: ${task_name}
+

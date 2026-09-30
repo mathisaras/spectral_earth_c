@@ -1,0 +1,49 @@
+# @package _group_
+# File: configs/model/regression.yaml
+_target_: src.models.regression_module.RegressionModule
+
+# Hydra will instantiate backbone_config and pass it to the model.
+# Configure this by choosing a file from configs/backbone in your experiment file,
+# or by defining it directly here for a default.
+defaults:
+  - backbone_config: "???" # Placeholder: e.g., resnet18_regression_backbone.yaml
+  - _self_
+
+# --- Module specific parameters ---
+num_outputs: 1 # Number of values to regress to (e.g., 1 for biomass, 4 for NPK values + something else)
+
+# MLP Head Configuration (created internally by the RegressionModule)
+# Provide a list of hidden layer dimensions. 
+# Example: [512, 256] will create an MLP: BackboneOut -> 512 -> ReLU -> Dropout -> 256 -> ReLU -> Dropout -> NumOutputs
+# An empty list [] means a direct Linear layer from BackboneOut (after initial BatchNorm) to NumOutputs.
+mlp_hidden_dims: [128, 64] 
+mlp_dropout: 0.2           # Dropout rate for hidden MLP layers. Set to 0 for no dropout.
+
+# Path to pretrained weights for the backbone (loaded after backbone instantiation from config)
+# Example: /path/to/your/backbone_weights.ckpt or null
+pretrained_weights_path: null 
+
+# Training params
+learning_rate: 1e-3
+weight_decay: 1e-4
+
+# Scheduler params (for CosineAnnealingLR by default)
+t_max: 100 
+# The module calculates eta_min as learning_rate / 100 if not specified otherwise or handled by PL
+
+# Loss configuration
+# If custom_loss_baseline is provided (as a list of floats matching num_outputs),
+# the custom_mse_loss (normalized MSE) will be used. 
+# Otherwise, standard nn.MSELoss is used.
+# Example for num_outputs=4: custom_loss_baseline: [0.1, 0.5, 0.2, 0.8]
+# Set to null or omit to use standard nn.MSELoss.
+custom_loss_baseline: null 
+
+# Finetuning params
+freeze_backbone: False
+finetune_adapter: False # Set to True if your backbone has a 'spectral_adapter' (from its config) and you want to finetune it.
+
+backbone: "spec_resnet50"
+in_channels: ${data.num_bands}
+
+baseline: [0.0, 0.0, 0.0, 0.0]

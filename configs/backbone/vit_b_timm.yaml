@@ -1,0 +1,7 @@
+_target_: src.backbones.vit_timm.vit_b_timm
+in_chans: ${sensor.num_bands}
+img_size: ${sensor.img_size}
+patch_size: 4
+num_classes: 0
+name: vit_b_timm
+dynamic_img_size: true

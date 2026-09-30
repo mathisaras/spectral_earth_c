@@ -1,0 +1,61 @@
+# @package _global_
+# DINOv2 pretrain with Spectral Earth Multi-Modal Zarr.
+# DataModule returns raw data; DINOv2 applies its own normalization and augmentation (Kornia).
+
+defaults:
+  - override /data: spectral_earth_mm_zarr
+  - override /model: dino_v2
+  - override /backbone@model.backbone_config: vit_b_timm
+  - override /sensor@model.sensor_config: enmap
+  - override /callbacks: self_supervised
+  - override /trainer: ddp_ssl
+  - override /logger: wandb
+
+tags: [ "pretrain", "dino_v2", "enmap", "mm_zarr" ]
+
+seed: 12345
+
+# -----------------------------------------------------------------------------
+# DATA: Raw data, DINOv2 does its own augmentation
+# -----------------------------------------------------------------------------
+data:
+  batch_size: 16
+  sensors: [ "ENMAP" ]
+  groups: null
+  num_temporal_views: 2  # DINOv2 creates its own views via multicrop
+  normalize: false
+  spatial_aug_p: 0
+  radiometric_aug_p: 0
+  sensor_drop_prob: 0
+  sampling_weights: null
+  num_workers: 6
+
+# -----------------------------------------------------------------------------
+# MODEL: DINOv2
+# -----------------------------------------------------------------------------
+model:
+  max_epochs: 100
+  warmup_epochs: 10
+  lr: 2.0e-4
+  min_lr: 1.0e-6
+  weight_decay: 0.001
+  weight_decay_end: 0.4
+  n_local_views: 4
+
+trainer:
+  max_epochs: ${model.max_epochs}
+  precision: 16-mixed
+  strategy: ddp
+
+backbone_name: vit_b_timm
+
+task_name: ssl_pretrain/spectral_earth_mm/${sensor.name}/dino_v2/${backbone_name}
+
+logger:
+  wandb:
+    tags: ${tags}
+    group: ${task_name}
+    project: ssl_pretrain_spectral_earth_mm
+    offline: False
+  aim:
+    experiment: ${task_name}

@@ -1,0 +1,15 @@
+# configs/data/h2sr_patch100.yaml
+#
+# Opt-in H2SR variant that preserves the repo-managed train/val/test split but
+# exposes each original 300x300 AMMIS tile as non-overlapping 100x100 patches.
+# The BaseSegmentationDataModule still resizes image+mask to the effective
+# sensor size, e.g. 128x128 when remapping to the DESIS branch.
+
+defaults:
+  - h2sr
+  - _self_
+
+patch_size: 100
+patch_stride: 100
+patch_source_size: 300
+drop_incomplete_patches: true

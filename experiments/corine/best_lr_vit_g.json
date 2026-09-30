@@ -1,0 +1,16 @@
+{
+  "downstream/corine_lr/spec_vit_giant/finetune/mae": {
+    "learning_rate": 3e-05,
+    "weight_decay": 0.0001,
+    "freeze_backbone": false,
+    "finetune_adapter": false,
+    "pretrained_weights": "./pretrained_models/spec_vit_g/mae.pth"
+  },
+  "downstream/corine_lr/spec_vit_giant/finetune/random": {
+    "learning_rate": 0.0001,
+    "weight_decay": 0.0001,
+    "freeze_backbone": false,
+    "finetune_adapter": false,
+    "pretrained_weights": null
+  }
+}

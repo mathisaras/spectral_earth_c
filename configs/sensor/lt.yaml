@@ -1,0 +1,21 @@
+# Landsat Thermal (TIRS) Sensor Configuration
+name: lt
+num_bands: 1  # Thermal bands (Band 10, Band 11)
+
+rgb_indices: [0, 0, 0]  # No RGB for thermal - placeholder
+
+# Normalization parameters - DN to Kelvin to normalized
+normalization:
+  type: thermal  # scale | harmonize | thermal | sar
+  slope: 0.00341802  # DN to radiance conversion
+  add: 149.0  # Offset for Kelvin conversion
+  temp_min: 250.0  # Min temperature for normalization (Kelvin)
+  temp_max: 350.0  # Max temperature for normalization (Kelvin)
+
+# NaN handling - 0 encodes missing/invalid thermal pixels
+nan_value: 0.0
+
+# Optional metadata
+resolution: 100  # meters (resampled from 100m native)
+img_size: 128
+band_names: ["Surface Temperature"]

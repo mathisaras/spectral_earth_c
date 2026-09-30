@@ -1,0 +1,47 @@
+# @package _global_
+
+defaults:
+  - override /data: oxhyper_enmap
+  - override /sensor: enmap
+  - override /sensor@data.sensor_config: enmap
+  - override /model: multilabel_segmentation
+  - override /trainer: ddp
+  - override /paths: default
+  - override /logger: wandb
+  - override /backbone@model.backbone_config: spec_vit_s
+  - override /decoder@model.decoder_config: conv_head
+
+tags: ["downstream", "oxhyper", "multilabel_segmentation"]
+
+model:
+  num_classes: ${data.num_classes}
+  model_type: "vit_seg"
+  learning_rate: 1e-3
+  weight_decay: 1e-4
+  t_max: ${trainer.max_epochs}
+  eta_min: 1e-6
+
+decoder:
+  num_classes: ${model.num_classes}
+
+data:
+  batch_size: 16
+  num_workers: 4
+
+trainer:
+  max_epochs: 100
+  devices: 1
+  strategy: auto
+
+experiment_setup: "oxhyper_enmap"
+protocol: null
+weight_init: random
+backbone_name: null
+decoder_name: null
+
+task_name: downstream/${experiment_setup}/${sensor.name}/${decoder_name}/${backbone_name}/${protocol}/${weight_init}
+
+logger:
+  wandb:
+    group: ${task_name}
+    project: "${experiment_setup}"

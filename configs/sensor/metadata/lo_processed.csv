@@ -1,0 +1,8 @@
+sensor,variant,processed_index_0based,processed_index_1based,raw_index_0based,raw_index_1based,wavelength_nm,width_nm,lower_edge_nm,upper_edge_nm,description
+LO,landsat8_oli,0,1,0,1,443.0,16.0,435.0,451.0,SR_B1 ultra blue/coastal aerosol surface reflectance.
+LO,landsat8_oli,1,2,1,2,482.0,60.0,452.0,512.0,SR_B2 blue surface reflectance.
+LO,landsat8_oli,2,3,2,3,561.5,57.0,533.0,590.0,SR_B3 green surface reflectance.
+LO,landsat8_oli,3,4,3,4,654.5,37.0,636.0,673.0,SR_B4 red surface reflectance.
+LO,landsat8_oli,4,5,4,5,865.0,28.0,851.0,879.0,SR_B5 near infrared surface reflectance.
+LO,landsat8_oli,5,6,5,6,1608.5,85.0,1566.0,1651.0,SR_B6 shortwave infrared 1 surface reflectance.
+LO,landsat8_oli,6,7,6,7,2200.5,187.0,2107.0,2294.0,SR_B7 shortwave infrared 2 surface reflectance.

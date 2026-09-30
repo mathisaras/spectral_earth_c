@@ -1,0 +1,82 @@
+generated_at_utc: '2026-02-21T11:10:01+00:00'
+sensor: S1
+zarr_path: /dss/dsstbyfs02/pn49cu/pn49cu-dss-0001/spectral_earth_mm.zarr
+timestamp_mode: random_single
+no_valid_policy: skip
+normalize: true
+pipeline:
+  desis_band_trim:
+    enabled: false
+  lt_nan_fix:
+    enabled: false
+  mm_normalize:
+    enabled: true
+stats:
+  num_bands: 2
+  pixel_count_per_band: 304046456832
+  pixel_count_total: 608092913664
+  input_sample_count: 2061947
+  selected_view_count: 2061947
+  fallback_no_valid_count: 0
+  skipped_no_valid_count: 0
+  global:
+    mean: 0.6505178526436716
+    std: 0.15905189599313563
+    min: 0.0
+    max: 1.0
+  bandwise:
+    mean:
+    - 0.7351075115108846
+    - 0.5659281937764548
+    std:
+    - 0.10935064626665746
+    - 0.15596995423652948
+    min:
+    - 0.0
+    - 0.0
+    max:
+    - 1.0
+    - 1.0
+  groups:
+    desis_only:
+      input_sample_count: 54111
+      selected_view_count: 54111
+      fallback_no_valid_count: 0
+      skipped_no_valid_count: 0
+      pixel_count_per_band: 7978991616
+    emit_only:
+      input_sample_count: 486388
+      selected_view_count: 486388
+      fallback_no_valid_count: 0
+      skipped_no_valid_count: 0
+      pixel_count_per_band: 71720828928
+    enmap_only:
+      input_sample_count: 580292
+      selected_view_count: 580292
+      fallback_no_valid_count: 0
+      skipped_no_valid_count: 0
+      pixel_count_per_band: 85567537152
+    pair_emit_desis:
+      input_sample_count: 102589
+      selected_view_count: 102589
+      fallback_no_valid_count: 0
+      skipped_no_valid_count: 0
+      pixel_count_per_band: 15127363584
+    pair_emit_enmap:
+      input_sample_count: 732196
+      selected_view_count: 732196
+      fallback_no_valid_count: 0
+      skipped_no_valid_count: 0
+      pixel_count_per_band: 107966693376
+    pair_enmap_desis:
+      input_sample_count: 37129
+      selected_view_count: 37129
+      fallback_no_valid_count: 0
+      skipped_no_valid_count: 0
+      pixel_count_per_band: 5474893824
+    triplet:
+      input_sample_count: 69242
+      selected_view_count: 69242
+      fallback_no_valid_count: 0
+      skipped_no_valid_count: 0
+      pixel_count_per_band: 10210148352

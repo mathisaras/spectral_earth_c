@@ -1,0 +1,4 @@
+_target_: src.backbones.spec_resnet.SpecResNet50
+num_classes: 0
+replace_stride_with_dilation: null
+return_features: null

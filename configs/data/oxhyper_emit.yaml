@@ -1,0 +1,38 @@
+_target_: src.datamodules.oxhyper_datamodule.OxhyperDataModule
+
+defaults:
+  - /sensor@sensor_config: emit
+
+product: "oxhyper"
+label_product: "minerals9"
+class_names: ["Calcite", "Chlorite", "Dolomite", "Goethite", "Hematite", "Illite+Muscovite", "Kaolinite", "Montmorillonite"]
+
+# Multi-label target bands on disk:
+# minerals9 -> [Calcite, Chlorite, Dolomite, Goethite, Gypsum, Hematite,
+#               Illite+Muscovite, Kaolinite, Montmorillonite]
+#
+# Pixels may activate multiple mineral bands simultaneously.
+classes: [0, 1, 2, 3, 5, 6, 7, 8]
+raw_ignore_value: 255
+ignore_value: -1.0
+invalid_value: -9999.0
+image_fill_value: 0.0
+
+# Patchify script output root.
+root: /dss/dsstbyfs02/pn49cu/pn49cu-dss-0001/mathi/final_patches/emit_Oxhyper
+split_root: data/splits_joint
+
+apply_input_normalization: true
+standardize: true
+standardization_mode: bandwise
+standardization_stats_path: data/emit_combined_statistics
+standardization_eps: 1.0e-6
+target_sensor_config: null
+
+batch_size: 16
+img_size: 128
+num_workers: 4
+
+num_classes: 8
+ignore_index: null
+split_dir: data/splits_joint/oxhyper/emit

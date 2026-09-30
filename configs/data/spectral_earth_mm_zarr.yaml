@@ -1,0 +1,146 @@
+# Spectral Earth Multi-Modal Zarr DataModule Configuration
+#
+# This DataModule loads multi-modal hyperspectral data from a Zarr archive
+# with support for sensor filtering, group selection, and data augmentation.
+
+
+_target_: src.datamodules.spectral_earth_mm_zarr.SpectralEarthMMZarrDataModule
+
+# Path to Zarr archive
+zarr_path: ${paths.zarr_path}
+
+# Batch size per GPU
+batch_size: 32
+
+# Max workers per group (scaled by group size/weight)
+num_workers: 6
+
+# =============================================================================
+# SENSOR/GROUP FILTERING
+# =============================================================================
+
+# List of sensors to use. Only groups containing these sensors will be sampled.
+# Set to null to use all available sensors.
+# Example: [EMIT, ENMAP, DESIS] or [EMIT] for single-sensor training
+sensors: null
+
+# List of groups to explicitly include.
+# Set to null to use all groups (after sensor filtering).
+# Example: [triplet, pair_emit_enmap] to train only on multi-sensor data
+groups: null
+
+# =============================================================================
+# SENSOR DROP AUGMENTATION
+# =============================================================================
+
+# Probability of dropping sensors during training (0 = disabled)
+# This helps models learn to handle missing modalities.
+# Dropping is done at BATCH level (all samples share same sensor mask).
+sensor_drop_prob: 0.0
+
+# Minimum sensors to keep after dropping (must be >= 1)
+min_sensors: 1
+
+# =============================================================================
+# SAMPLING WEIGHTS
+# =============================================================================
+
+# Custom sampling weights per group.
+# Set to null for default: sqrt(group_size) which balances large/small groups.
+# Example:
+#   sampling_weights:
+#     triplet: 10.0
+#     pair_emit_enmap: 5.0
+#     emit_only: 1.0
+sampling_weights: null
+
+# =============================================================================
+# SPATIAL AUGMENTATION
+# =============================================================================
+# Flip and crop augmentations applied to all sensors.
+
+# Probability of applying spatial augmentation (0 = disabled, 1 = always)
+spatial_aug_p: 0.75
+
+# Enable horizontal flip
+spatial_aug_flip_h: true
+
+# Enable vertical flip
+spatial_aug_flip_v: true
+
+# Enable random resized crop
+spatial_aug_crop: true
+
+# Crop scale range (min, max) as fraction of original size
+spatial_aug_crop_scale: [0.4, 1.0]
+
+# If true, apply same spatial transform to all sensors (preserves alignment).
+# If false, each sensor gets independent random transforms.
+spatial_aug_consistent: true
+
+# =============================================================================
+# RADIOMETRIC AUGMENTATION
+# =============================================================================
+# Brightness and contrast augmentations to simulate sensor variations.
+
+# Probability of applying radiometric augmentation (0 = disabled, 1 = always)
+radiometric_aug_p: 0.5
+
+# Brightness multiplier range (min, max). E.g., [0.8, 1.2] = 80%-120%
+radiometric_aug_brightness: [0.8, 1.2]
+
+# Additive bias range (min, max). E.g., [-0.1, 0.1] = shift by ±0.1
+radiometric_aug_bias: [-0.1, 0.1]
+
+# If true, sample different params per spectral channel.
+# If false, same params for all channels in a sensor.
+radiometric_aug_per_channel: false
+
+# If true, apply same radiometric transform to all sensors.
+# If false, each sensor gets independent random transforms.
+radiometric_aug_consistent: true
+
+# =============================================================================
+# NORMALIZATION
+# =============================================================================
+# If true, apply MMNormalizer to sensor tensors. If false, leave data raw
+# (e.g. for DINO/MoCo where the model does its own normalization).
+normalize: true
+
+# Optional mean/std standardization on top of normalization.
+# Keep disabled by default for full backward compatibility.
+standardize: false
+
+# Optional allow-list for standardization. If null, all sensor tensors are
+# standardized when `standardize=true`.
+# Example: [S1, S2, LO]
+standardize_modalities: null
+
+# Standardization mode:
+# - bandwise: per-band mean/std from stats yaml
+# - global: one shared mean/std per sensor
+standardization_mode: bandwise
+
+# Path to stats source:
+# - sensor yaml (e.g. .../enmap.yaml)
+# - index yaml (e.g. .../index.yaml)
+# - directory containing <sensor>.yaml files
+standardization_stats_path: null
+
+# Numerical stability epsilon used to clamp std.
+standardization_eps: 1.0e-6
+
+# =============================================================================
+# TEMPORAL MULTI-VIEW (for SSL like DINO/MoCo)
+# =============================================================================
+# Number of temporal views to return per sample (1 or 2).
+# When 2, returns two different timestamps as separate views for SSL.
+# The datamodule will split these into 'image1' and 'image2' keys.
+num_temporal_views: 1
+
+# =============================================================================
+# OTHER
+# =============================================================================
+
+# Pin memory for faster GPU transfer
+pin_memory: true

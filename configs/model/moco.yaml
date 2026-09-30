@@ -1,0 +1,45 @@
+_recursive_: false
+
+defaults:
+  - /backbone@backbone_config: spec_vit_b # Default to resnet50.yaml
+  - /sensor@sensor_config: enmap
+  - _self_
+
+_target_: src.models.moco_module.MoCoModule
+
+# Hydra will instantiate backbone_config and pass it to the model.
+# Configure this by choosing a file from configs/backbone in your experiment file,
+# or by defining it directly here for a default.
+
+
+# sensor_config is populated by /sensor@sensor_config (override in experiment if needed).
+
+# --- MoCoModule specific parameters ---
+
+# Projection head MLP layers (fixed to 2 for MoCo v2)
+layers: 2
+# Dimensionality of the hidden layer in the projection head (recommended for v2)
+hidden_dim: 2048
+# Dimensionality of the output projection (recommended for v2)
+output_dim: 128
+
+# Optimizer params (SGD for MoCo)
+lr: 0.03
+weight_decay: 0.0001 # Corresponds to 1e-4
+
+# NTXentLoss params
+temperature: 0.1
+memory_bank_size: 32768 # N: Size of the memory bank (negative samples)
+
+# MoCo specific params
+moco_momentum: 0.999 # Momentum for updating the key encoder
+
+
+# Distributed training
+gather_distributed: False # Set to True if using DDP for NTXentLoss
+
+# Backbone specific fine-tuning
+# If True, and the backbone is a ViT-like model with a 'patch_embed.proj' layer,
+# the weights of this projection layer will be frozen.
+# This is useful if you are using a pretrained ViT and only want to train the linear projection.
+freeze_patch_embed: False
